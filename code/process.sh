@@ -2,39 +2,6 @@
 
 source configuration.txt
 
-# prepare() {
-#   cd ${idir}
-#   # BEGIN MAKE META FILE
-#   echo "barcode,dataset,end1,end2" > ${META_OUT}
-#   for f in "${FASTQ_TRIMMED_PATH}"*val_1.fq
-#   do
-#       # f="../../data/something.csv"
-#       # --> ${f##*/} is something.csv
-#       barcode=$(echo ${f##*/} | cut -d "_" -f 1 | sed -E 's/R/s/')
-#     # dataset=$(echo ${f##*/} | sed -E 's/val_[1-2].fq//' | sed -E 's/_R1_//')
-#       file1=$(echo ${f##*/})
-#       file2=$(echo ${f##*/} | sed -E 's/R1/R2/' | sed -E 's/val_1/val_2/')
-#       echo "${barcode},${barcode},${file1},${file2}" >> ${META_OUT}
-#   done
-#   # END MAKE META FILE
-#   echo "Preparing gemBS, should only take a second"
-#   echo "${CONF_TXT}" > ${CONF_OUT}
-#   # GEMBS PREPARATION AND CONSOLE OUTPUT
-#   rm -rf .gemBS # clears some hanging errors
-#   gemBS prepare -c ${CONF_OUT} -t ${META_OUT}
-#   echo "gemBS will run the following commands:"
-#   gemBS --dry-run run
-#   cd ${home}
-# }
-
-# remove_tmps() {
-#   cd ${idir}
-#   cd ${MAP_PATH}
-#   echo "Removing temp files"
-#   rm *.tmp*
-#   cd ${home}
-# }
-
 prepare() {
   cd ${idir}
   gemBS prepare -c ${CONF_OUT} -t ${META_OUT}
@@ -90,11 +57,10 @@ clean_trim_dir() {
 
 
 trim() {
-    cd ${idir}
-    # mkdir -p ${FASTQ_TRIMMED_PATH}
+    
     > LEFT # LEFT reads stored line-by-line in this file
     > RIGHT
-    for ff in ${FASTQ_PATH}*R1*.fastq.gz; do 
+    for ff in $(find ${idir}${FASTQ_PATH} -name *R1.fastq.gz); do 
         un=$(basename ${ff} | cut -c1-3) # grab the 123 from 00-fastq/123_stuff.fastq.gz
 
         # a successful trim_galore run produces 4 files starting with 123
@@ -112,8 +78,10 @@ trim() {
     # --link creates a mapping between the lines in LEFT and lines in RIGHT 
     # (one-to-one like python's zip instead of pairwise combinations)
     # the fourth ':' means cat LEFT and RIGHT (don't treat as variable/expansion)
-    parallel --link -S ${RUN_SERVERS} --jobs 3 --workdir . --joblog trim.log \
-        trim_galore --phred33 --cores 6 --output_dir ${FASTQ_TRIMMED_PATH} \
+    parallel --link -S nebula-5 \
+      --jobs 3 --workdir . --joblog trim.log \
+        trim_galore --phred33 --cores 6 \
+        --output_dir ${FASTQ_TRIMMED_PATH} \
         --dont_gzip --paired {1} {2} :::: LEFT :::: RIGHT
     rm LEFT RIGHT # cleanup
 
@@ -183,3 +151,42 @@ else
   echo "Function $1 not recognized" >&2
   exit 1
 fi
+
+
+
+
+
+
+
+# prepare() {
+#   cd ${idir}
+#   # BEGIN MAKE META FILE
+#   echo "barcode,dataset,end1,end2" > ${META_OUT}
+#   for f in "${FASTQ_TRIMMED_PATH}"*val_1.fq
+#   do
+#       # f="../../data/something.csv"
+#       # --> ${f##*/} is something.csv
+#       barcode=$(echo ${f##*/} | cut -d "_" -f 1 | sed -E 's/R/s/')
+#     # dataset=$(echo ${f##*/} | sed -E 's/val_[1-2].fq//' | sed -E 's/_R1_//')
+#       file1=$(echo ${f##*/})
+#       file2=$(echo ${f##*/} | sed -E 's/R1/R2/' | sed -E 's/val_1/val_2/')
+#       echo "${barcode},${barcode},${file1},${file2}" >> ${META_OUT}
+#   done
+#   # END MAKE META FILE
+#   echo "Preparing gemBS, should only take a second"
+#   echo "${CONF_TXT}" > ${CONF_OUT}
+#   # GEMBS PREPARATION AND CONSOLE OUTPUT
+#   rm -rf .gemBS # clears some hanging errors
+#   gemBS prepare -c ${CONF_OUT} -t ${META_OUT}
+#   echo "gemBS will run the following commands:"
+#   gemBS --dry-run run
+#   cd ${home}
+# }
+
+# remove_tmps() {
+#   cd ${idir}
+#   cd ${MAP_PATH}
+#   echo "Removing temp files"
+#   rm *.tmp*
+#   cd ${home}
+# }

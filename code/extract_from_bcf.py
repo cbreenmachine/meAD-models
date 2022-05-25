@@ -74,7 +74,7 @@ def main(args):
 if __name__== "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--ifile", default= stdin, help="input file; should be tab separated")
-    parser.add_argument("--ofile", default= stdout, help = "output file, also tab separated (like BED)")
+    parser.add_argument("--ofile", default= stdout, help = "output file, also tab separated (BED)")
     parser.add_argument("--merge", action="store_true", help = "")
     args = parser.parse_args()
     main(args)

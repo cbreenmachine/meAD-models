@@ -131,6 +131,10 @@ if __name__ == "__main__":
     parser.add_argument('--ifile', default = '../../data/cov-meth/chr22.csv') #TODO: change to CSV in extract...
     parser.add_argument('--odir', default = '../../data/prin-comps-array-samples/')
     parser.add_argument('--samples_file', default = None, help="CSV of samples to include")
+    # samples_file should look like
+    # sample,condition
+    # 100,LOAD
+    # 101,Control
     args = parser.parse_args()
 
     main(args)
