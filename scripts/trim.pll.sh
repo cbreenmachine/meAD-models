@@ -37,8 +37,13 @@ for ff in $(find ${idir} -name *R1.fastq.gz); do
     
 done
 
+trim_wrapper(){
+    # Do the trimming and then rename file...
+    # Or move?
+}
 
-
+#TODO: working dir taken from parent
+#TODO: 
 # --link creates a mapping between the lines in LEFT and lines in RIGHT 
 # (one-to-one like python's zip instead of pairwise combinations)
 parallel --link \

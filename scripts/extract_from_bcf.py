@@ -1,5 +1,6 @@
+#!/usr/bin/env conda run -n wgbs python
 # extract_from_bcf.py
-# Broadly speaking, takes 
+# Broadly speaking, takes bcf output by gemBS and puts it into bed form
 
 # Piped from bcftools query:
 # %CHROM\t%POS\t[%CS]\t%REF\t[%MC8{4}]\t[%MC8{5}]\t[%MC8{6}]\t[%MC8{7}]\n
