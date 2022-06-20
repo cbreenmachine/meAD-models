@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Plot PCs for just array
-# Plot PCs for all
-
-Rscript plot-PCs.R --idir ../../data/prin-comps/ --odir ./figs/
-Rscript plot-PCs.R --idir ../../data/prin-comps-array/ --odir ./figs-array/
+for ii in $(echo {1..22});
+do
+    Rscript plot-PCs.R --chrom "chrom${ii}"
+done

@@ -5,7 +5,6 @@ suppressPackageStartupMessages({
     library(tidyverse)
     library(argparse)
     library(DSS)
-    library(dmrseq)
 })
 
 parser <- ArgumentParser()
@@ -16,7 +15,6 @@ parser$add_argument("--num_pcs", default= 2, help= 'Number of principal componen
 parser$add_argument("--smoothing", default= 100, help= 'Width of smoothing window')
 # Flags for methods
 parser$add_argument("--DSS", action = "store_true", help = "Which method to use")
-parser$add_argument("--DMRseq", action="store_true", help = "Which method to use")
 # File paths
 parser$add_argument("--samples_file", default= "../../data/meta/array-samples.csv", help="CSV file with samples to filter")
 parser$add_argument("--pheno_file", default= "../../data/meta/phenos-cleaned.csv", help="CSV file with LOAD/control status")
@@ -83,22 +81,22 @@ if (args$DSS){
     test.cohort <- DMLtest.multiFactor(dml.fit, coef = test.var)
 }
 
-if (args$DMRseq){
-    #--> DMR seq version of analysis
-    pData(bs) <- filt.df %>% dplyr::select(c("cohort", all_of(covariates)))
+# if (args$DMRseq){
+#     #--> DMR seq version of analysis
+#     pData(bs) <- filt.df %>% dplyr::select(c("cohort", all_of(covariates)))
 
-    loci.idx <- which(DelayedMatrixStats::rowSums2(getCoverage(bs, type="Cov")==0) == 0)
-    sample.idx <- which(pData(bs)$cohort %in% c("AD", "CONTROL"))
-    bs.filtered <- bs[loci.idx, sample.idx]
+#     loci.idx <- which(DelayedMatrixStats::rowSums2(getCoverage(bs, type="Cov")==0) == 0)
+#     sample.idx <- which(pData(bs)$cohort %in% c("AD", "CONTROL"))
+#     bs.filtered <- bs[loci.idx, sample.idx]
 
-    register(MulticoreParam(4)) # Restrict because otherwise not enough memory...
-    regions <- dmrseq(bs = bs.filtered, cutoff = 0.05, 
-                    testCovariate = "cohort", 
-                    minNumRegion = 5, 
-                    adjustCovariate = covariates, 
-                    bpSpan = args$smoothing, minInSpan = 10)
+#     register(MulticoreParam(4)) # Restrict because otherwise not enough memory...
+#     regions <- dmrseq(bs = bs.filtered, cutoff = 0.05, 
+#                     testCovariate = "cohort", 
+#                     minNumRegion = 5, 
+#                     adjustCovariate = covariates, 
+#                     bpSpan = args$smoothing, minInSpan = 10)
 
-}
+# }
 
 # Save the models
 outname <- file.path(odir, "models.RData")

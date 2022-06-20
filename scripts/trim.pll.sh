@@ -37,10 +37,10 @@ for ff in $(find ${idir} -name *R1.fastq.gz); do
     
 done
 
-trim_wrapper(){
-    # Do the trimming and then rename file...
-    # Or move?
-}
+cat TRIMMED|uniq > TRIMMED
+
+head LEFT > LEFT
+head RIGHT > RIGHT
 
 #TODO: working dir taken from parent
 #TODO: 
@@ -48,8 +48,8 @@ trim_wrapper(){
 # (one-to-one like python's zip instead of pairwise combinations)
 parallel --link \
     -S nebula-5 \
-    --jobs 50% --workdir . \
+    --jobs 3 --workdir . \
     --joblog trim.log \
-        trim_galore --phred33 --cores 4 \
+        trim_galore --phred33 --overlap 3 \
         --output_dir ${odir} \
         --dont_gzip --paired {1} {2} :::: LEFT :::: RIGHT

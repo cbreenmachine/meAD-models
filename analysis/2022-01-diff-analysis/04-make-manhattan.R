@@ -5,9 +5,11 @@ suppressPackageStartupMessages({
     library(wiscR)
     library(DSS)
     library(fdrtool)
-
+    library(genomation)
+    library(methylKit)
 }) 
 
+LFDR_CUT <- 0.01
 
 # Load data --------------------------------------------------------------------
 all.files <- system("find . -name models.RData | grep smooth-150-PCs-2", intern = T)
@@ -31,9 +33,9 @@ all.files <- system("find . -name models.RData | grep smooth-150-PCs-2", intern 
     return(df)
 }
 
-.wrapper <- function(path){ .load_data(path) %>% .correct_pvals() %>% return()}
-df <- do.call("rbind", lapply(all.files, .wrapper))  %>% mutate(p = pvals.adj)
-
+# .wrapper <- function(path){ .load_data(path) %>% .correct_pvals() %>% return()}
+.wrapper <- function(path){ .load_data(path) %>% return()}
+df <- do.call("rbind", lapply(all.files, .wrapper))  %>% .correct_pvals() %>% mutate(p = pvals.adj)
 
 
 # Plot functions -------------------------------------------------------------------
@@ -46,11 +48,11 @@ df <- do.call("rbind", lapply(all.files, .wrapper))  %>% mutate(p = pvals.adj)
 }
 
 
-.thin_data <- function(df, alpha=0.1, prop=0.05){
+.thin_data <- function(df, alpha=0.01, prop=0.05){
     # Samples a proportion of non-significant sites to make plotting faster
-    sig.df <- df %>% dplyr::filter(p < alpha)
+    sig.df <- df %>% dplyr::filter(lfdr < alpha)
     nonsig.df <- df %>% 
-        dplyr::filter(p > alpha) %>% 
+        dplyr::filter(lfdr > alpha) %>% 
         dplyr::slice_sample(prop = prop)
     
     thinned.df <- rbind(sig.df, nonsig.df) %>% 
@@ -81,12 +83,14 @@ sub.df <- .thin_data(df) %>% .adjust_pos()
 axis.set <- .generate_axis_set(sub.df)
 
 p <- sub.df %>% 
-  ggplot(aes(x = bp_cum, color = as.factor(chr), y = -log10(p))) +
+  ggplot(aes(x = bp_cum, color = as.factor(chr), y = -log10(lfdr))) +
   geom_point(alpha = 0.9, size = 3.5) +
   scale_x_continuous(label = axis.set$chr, breaks = axis.set$center) +
   wiscR::light_theme() +
   xlab("") +
-  ylab("-log10(p)") +
+#   ylab("-log10(p)") +
+  ylab("-log10(LFDR)") +
+  geom_hline(yintercept = -log10(LFDR_CUT), size=2) +
   theme( 
     legend.position = "none",
     panel.border = element_blank(),
@@ -100,5 +104,20 @@ p <- sub.df %>%
   scale_color_manual(values = rep(c("grey", "#C5050C"), 12)) +
   xlab("Genomic position")
 
+
 wiscR::save_plot(p, "manhattan-adjusted.png")
   
+
+# Pie chart / annotation -----------------------------------------
+
+gr <- df %>% dplyr::filter(lfdr < LFDR_CUT) %>%
+        dplyr::rename(start=pos) %>% 
+        dplyr::mutate(end=start+1) %>% 
+        GRanges()
+
+gene.obj <- readTranscriptFeatures("gencode.hg38.bed", )
+diff.ann <- annotateWithGeneParts(gr, gene.obj)
+
+png("pie-chart.png")
+genomation::plotTargetAnnotation(diff.ann,precedence=TRUE,main="Genomic location of DMPs",cex.axis=2)
+dev.off()

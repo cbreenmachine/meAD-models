@@ -24,8 +24,6 @@ call(){
   # END CALLING
 }
 
-
-
 extract() {
   # Extract csv from one bcf
   ifile="$1"

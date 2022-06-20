@@ -1,0 +1,1 @@
+bedtools intersect -a TSS10kb.bed -b DMPs*bed -c

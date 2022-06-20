@@ -3,83 +3,58 @@
 suppressPackageStartupMessages({
     library(data.table)
     library(tidyverse)
-    library(argparse)
     library(fdrtool)
-    library(VennDiagram)
-    library(RColorBrewer)
 })
 
-# Argument parsing -----------------------------------------------------------
-parser <- ArgumentParser()
-parser$add_argument("--idir", default= "./chr18/smooth-150-PCs-2/", help="directory with models.RData")
-parser$add_argument("--alpha", default= 0.01, help="local false discovery rate cutoff")
-args <- parser$parse_args()
+
+all.files <- system("find . -name models.RData | grep smooth-150-PCs-2", intern = T)
+
+.correct_pvals <- function(df){
+    zz <- (df$stat - mean(df$stat)) / sd(df$stat)
+    out <- fdrtool(zz, statistic = "normal", plot = FALSE, cutoff.method = "locfdr")
+
+    df$pvals.adj <- out$pval
+    df$lfdr <- out$lfdr 
+    df$qval <- out$qval
+    return(df)
+}
 
 
-# Load data
-load(file.path(args$idir, "models.RData"))
+.load_data <- function(path){
+    # Load from path like "./chr8/smooth-150-PCs-2/models.RData"
+    load(path)
+    df <- data.frame(chr = test.cohort$chr, pos = test.cohort$pos, 
+                stat = test.cohort$stat) %>% drop_na() 
+    return(df)
+}
 
-# Infer chromosome...
-CHR <- test.cohort$chr[1]
+# .wrapper <- function(path){ .load_data(path) %>% .correct_pvals() %>% return()}
+.wrapper <- function(path){ .load_data(path) %>% return()}
+df <- do.call("rbind", lapply(all.files, .wrapper))  %>% .correct_pvals() %>% mutate(p = pvals.adj)
 
-# Coerce to normal data.frame
-df <- test.cohort
-class(df) <- "data.frame"
-df <- drop_na(df) # a few hundred-couple thousand rows dropped
-
-# given the processed test.cohort
-zz <- (df$stat - mean(df$stat)) / sd(df$stat)
-out <- fdrtool(zz, statistic = "normal", plot = FALSE, cutoff.method = "locfdr")
-
-# Overwride pvals with corrected ones
-df$pvals <- out$pval
-
-# The rest are additional columns
-df$pval <- out$pval
-df$lfdr <- out$lfdr 
-df$qval <- out$qval
+df.2 <- df %>% 
+    dplyr::mutate(chrom = chr, chromStart = pos - 1, chromEnd = chromStart + 1, direction = sign(stat)) %>% 
+    dplyr::select(-pos) %>%
+    dplyr::select(chrom, chromStart, chromEnd, lfdr, p, qval, direction)
 
 
-###################### OUTPUT BED FILE ############################
+filter_and_write <- function(df, s, cut=0.05){
+    
+    sig <- paste0("0", as.character(round(cut * 100)))
+    ofile <- paste0("DMPs.", s, sig, ".bed")
+    print(ofile)
 
-ofile <- file.path(args$idir, "DMPs.bed")
+    df %>% filter(get(s) < cut) %>%
+        fwrite(ofile, sep = "\t")
+}
 
-df %>%
-    filter(lfdr < args$alpha) %>%
-    transmute(chr, start = pos - 1, end = pos + 1, lfdr = lfdr) %>%
-    write_tsv(ofile)
+for (cut in c(0.01, 0.05)){
 
+    for (s in c("lfdr", "p", "qval")){
+        filter_and_write(df.2, s, cut)
+    }
 
+}
 
-
-
-
-
-################# PLOT VENN DIAGRAM ##############################
-
-low_q <- df$pos[df$qval < alpha]
-low_lfdr <- df$pos[df$lfdr < alpha]
-
-
-venn.diagram(
-        x = list(low_q, low_lfdr),
-        category.names = c("Q" , "FDR"),
-        filename = 'venn_diagramm.png',
-        output=TRUE,
-        
-        # Output features
-        imagetype="png" ,
-        height = 480 , 
-        width = 480 , 
-        resolution = 300,
-        compression = "lzw",
-
-        col=c("#440154ff", '#21908dff'),
-        fill = c(alpha("#440154ff",0.3), alpha('#21908dff',0.3)),
-                
-        # Numbers
-        cex = .6,
-        fontface = "bold",
-        fontfamily = "sans",
-        
-)
+ofile <- "DMPs.bed"
+fwrite(df.2, ofile, sep="\t")
