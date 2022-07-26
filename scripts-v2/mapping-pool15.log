@@ -1,0 +1,12 @@
+Seq	Host	Starttime	JobRuntime	Send	Receive	Exitval	Signal	Command
+1	:	1658871986.494	     0.000	0	111	0	0	map_wrapper ../data/pool15/200_TTACCGAC-CGTATTCG_L00M_R1_001.fastq.gz ../data/pool15/200_TTACCGAC-CGTATTCG_L00M_R2_001.fastq.gz
+2	:	1658871986.730	     0.026	0	111	0	0	map_wrapper ../data/pool15/202_TCGTCTGA-TCAAGGAC_L00M_R1_001.fastq.gz ../data/pool15/202_TCGTCTGA-TCAAGGAC_L00M_R2_001.fastq.gz
+3	:	1658871986.744	     0.075	0	111	0	0	map_wrapper ../data/pool15/399_CGTATCTC-GTACCTTG_L00M_R1_001.fastq.gz ../data/pool15/399_CGTATCTC-GTACCTTG_L00M_R2_001.fastq.gz
+4	:	1658871986.756	     0.065	0	111	0	0	map_wrapper ../data/pool15/400_TTACGTGC-CAAGGTCT_L00M_R1_001.fastq.gz ../data/pool15/400_TTACGTGC-CAAGGTCT_L00M_R2_001.fastq.gz
+5	:	1658871986.819	     0.131	0	111	0	0	map_wrapper ../data/pool15/401_AGCTAAGC-GTAACGAC_L00M_R1_001.fastq.gz ../data/pool15/401_AGCTAAGC-GTAACGAC_L00M_R2_001.fastq.gz
+6	:	1658871986.951	     0.028	0	111	0	0	map_wrapper ../data/pool15/402_AAGACACC-TCGGTTAC_L00M_R1_001.fastq.gz ../data/pool15/402_AAGACACC-TCGGTTAC_L00M_R2_001.fastq.gz
+7	:	1658871986.979	     0.050	0	111	0	0	map_wrapper ../data/pool15/403_CAACTCCA-ACGGATTC_L00M_R1_001.fastq.gz ../data/pool15/403_CAACTCCA-ACGGATTC_L00M_R2_001.fastq.gz
+8	:	1658871987.018	     0.047	0	111	0	0	map_wrapper ../data/pool15/404_GATCTTGC-TGCTCATG_L00M_R1_001.fastq.gz ../data/pool15/404_GATCTTGC-TGCTCATG_L00M_R2_001.fastq.gz
+9	:	1658871987.029	     0.036	0	111	0	0	map_wrapper ../data/pool15/405_CTTCACTG-GTCCTAAG_L00M_R1_001.fastq.gz ../data/pool15/405_CTTCACTG-GTCCTAAG_L00M_R2_001.fastq.gz
+10	:	1658871987.064	     0.059	0	111	0	0	map_wrapper ../data/pool15/407_CTCGACTT-GGTCAGAT_L00M_R1_001.fastq.gz ../data/pool15/407_CTCGACTT-GGTCAGAT_L00M_R2_001.fastq.gz
+13	:	1658871987.152	     0.013	0	111	0	0	map_wrapper ../data/pool15/410_GAACGGTT-ATTCCTCC_L00M_R1_001.fastq.gz ../data/pool15/410_GAACGGTT-ATTCCTCC_L00M_R2_001.fastq.gz

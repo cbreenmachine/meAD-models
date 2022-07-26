@@ -2,17 +2,25 @@
 
 ref_file=../data/study-data/experimental-design.tsv
 
-> tmp.txt
-
-for ff in ../data/02-mapping/*bam;
+> processed.txt
+for zz in $(find ../data/ -name *am | rev | cut -d '/' -f1 | rev | cut -d '.' -f1 | sort |uniq);
 do
-    zz=$(basename "${ff##*/}" .bam)
-    grep "${zz}" "${ref_file}"  >> tmp.txt
+    grep "${zz}" "${ref_file}"  >> processed.txt
 done
 
+cat processed.txt | tr -s ' ' | cut -d ' '  -f3 | sort | uniq -c
 
-cat tmp.txt | tr -s ' ' | cut -d ' '  -f3 | sort | uniq -c
 
-rm tmp.txt
+
+ref_file=../data/sample-info/master-samplesheet.csv
+
+> processed.txt
+for zz in $(find ../data/ -name *am | rev | cut -d '/' -f1 | rev | cut -d '.' -f1 | sort |uniq);
+do
+    grep "^${zz}," "${ref_file}"  >> processed.txt
+done
+cat processed.txt  |cut -d  ","  -f26 | sort | uniq -c
+
+rm processed.txt
+
 #END
-
