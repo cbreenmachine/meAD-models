@@ -1,7 +1,6 @@
 #!/bin/bash
 # TODO: file names for parallel should have sys time appended so we can run multiple instances
 idir="${1}"
-#odir="${2}"
 njobs="${2}"
 
 left_file="map_left_$(basename ${idir})_reads"
@@ -25,6 +24,9 @@ map_wrapper(){
     ofile="${left_root_name}.unsorted.sam"
     ofile_alt="{left_root_name}.bam"
 
+
+    #TODO: reverse these loops; check if json exists
+
     if [[ $left_root_name == $right_root_name ]]
     then
     echo "Reads match, mapping now"
@@ -45,6 +47,9 @@ map_wrapper(){
 log="mapping-$(basename ${idir}).log"
 
 export -f map_wrapper
-parallel --link --workdir . \
-    --jobs "${njobs}" --joblog "${log}" --retries 4 \
+~/bin/parallel --link --workdir . \
+    --jobs "${njobs}" --joblog "${log}" \
     map_wrapper {1} {2} :::: ${left_file} :::: ${right_file}
+
+
+rm "${left_file}" "${right_file}"

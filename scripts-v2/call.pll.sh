@@ -1,50 +1,42 @@
 #!/bin/bash
-# TODO: file names for parallel should have sys time appended so we can run multiple instances
+# call.pll.sh
+# Operates on directory of (usually 20) files and takes input bam files and outputs
+# bcf variant call files
+# Runs like `./call.pll.sh ../data/pool17/ 10`
+# Runs in gem environment--need parallel, bcftools, and samtools
+# Indexing takes ~10-15 mins
+
 idir="${1}"
-#odir="${2}"
 njobs="${2}"
 
-left_file="map_left_$(basename ${idir})_reads"
-right_file="map_right_$(basename ${idir})_reads"
+files="call_$(basename ${idir})_bams"
+find "${idir}" -type f -name [0-9][0-9][0-9].bam | sort > ${files}
 
-find "${idir}" -name *R1* | sort > ${left_file}
-find "${idir}" -name *R2* | sort > ${right_file}
-
-map_wrapper(){
+call_wrapper(){
     # Keep in function so it exports
-    ref_path=../../reference/GENCODE/gembs-index/h38_no_alt.BS.gem
+    ref_path=../../reference/GENCODE/h38_no_alt.fa
 
     # e.g. ../data/pool11/489_R1.fastq.gz
-    left="${1}"
-    right="${2}"
+    ifile="${1}"
+    ofile=$(echo ${ifile} | sed s/bam/bcf/)
+   
+    if ! [[ -f "${ofile}" ]]; then
+        # Output DNE --> run calling
+        # bcftools
+        samtools view -h -f 2 "${ifile}" \
+            | bs_call --reference "${ref_path}" -L4 \
+            | bcftools view -Ob "${ofile}"
 
-    # e.g. ../data/pool11/489
-    left_root_name=$(echo ${left} | cut -d _ -f1)
-    right_root_name=$(echo ${right} | cut -d _ -f1)
-
-    ofile="${left_root_name}.unsorted.sam"
-    ofile_alt="{left_root_name}.bam"
-
-    if [[ $left_root_name == $right_root_name ]]
-    then
-    echo "Reads match, mapping now"
-        if [[ -f "${ofile}" || -f "${ofile_alt}" ]]
-        then
-            echo "${left} already processed, skipping"
-        else
-            gem-mapper -I "${ref_path}" \
-                --threads 4 \
-                --report-file "${left_root_name}.json" \
-                --i1 "${left}" --i2 "${right}" -o "${ofile}"
-        fi
+        # Also index the output bcf
+        bcftools index "${ofile}"
     else
-        echo "Left/Right read names don't match"
+        echo "${ofile} already exists, delete if you want to process"        
     fi
 }
 
-log="mapping-$(basename ${idir}).log"
+log="calling-$(basename ${idir}).log"
 
-export -f map_wrapper
-parallel --link --workdir . \
-    --jobs "${njobs}" --joblog "${log}" --retries 4 \
-    map_wrapper {1} {2} :::: ${left_file} :::: ${right_file}
+export -f call_wrapper
+~/bin/parallel --link --workdir . \
+    --jobs "${njobs}" --joblog "${log}" \
+    call_wrapper {1} :::: ${files}

@@ -1,0 +1,21 @@
+Seq	Host	Starttime	JobRuntime	Send	Receive	Exitval	Signal	Command
+1	:	1659107775.204	 20311.976	0	0	255	0	call_wrapper ../data/pool17/434.bam
+2	:	1659107775.211	 21203.483	0	0	255	0	call_wrapper ../data/pool17/435.bam
+4	:	1659107775.226	 22480.478	0	0	255	0	call_wrapper ../data/pool17/437.bam
+3	:	1659107775.219	 22943.462	0	0	255	0	call_wrapper ../data/pool17/436.bam
+5	:	1659128087.260	 16849.940	0	0	255	0	call_wrapper ../data/pool17/438.bam
+6	:	1659128978.726	 17040.325	0	0	255	0	call_wrapper ../data/pool17/439.bam
+8	:	1659130718.769	 15570.490	0	0	255	0	call_wrapper ../data/pool17/441.bam
+7	:	1659130255.747	 16844.611	0	0	255	0	call_wrapper ../data/pool17/440.bam
+9	:	1659144937.309	 14043.088	0	0	255	0	call_wrapper ../data/pool17/442.bam
+10	:	1659146019.245	 13465.646	0	0	255	0	call_wrapper ../data/pool17/443.bam
+12	:	1659147100.449	 14195.888	0	0	255	0	call_wrapper ../data/pool17/445.bam
+11	:	1659146289.305	 16240.862	0	0	255	0	call_wrapper ../data/pool17/444.bam
+13	:	1659158980.506	 15643.917	0	0	255	0	call_wrapper ../data/pool17/446.bam
+15	:	1659161296.385	 14351.697	0	0	255	0	call_wrapper ../data/pool17/448.bam
+14	:	1659159484.928	 19131.795	0	0	255	0	call_wrapper ../data/pool17/447.bam
+16	:	1659162530.280	 16634.344	0	0	255	0	call_wrapper ../data/pool17/449.bam
+17	:	1659174624.926	 15165.938	0	0	255	0	call_wrapper ../data/pool17/451.bam
+18	:	1659175648.148	 14165.887	0	0	255	0	call_wrapper ../data/pool17/452.bam
+19	:	1659178616.859	 14245.627	0	0	255	0	call_wrapper ../data/pool17/453.bam
+20	:	1659179164.844	 16889.627	0	0	255	0	call_wrapper ../data/pool17/454.bam

@@ -10,3 +10,12 @@ Seq	Host	Starttime	JobRuntime	Send	Receive	Exitval	Signal	Command
 9	:	1658871987.029	     0.036	0	111	0	0	map_wrapper ../data/pool15/405_CTTCACTG-GTCCTAAG_L00M_R1_001.fastq.gz ../data/pool15/405_CTTCACTG-GTCCTAAG_L00M_R2_001.fastq.gz
 10	:	1658871987.064	     0.059	0	111	0	0	map_wrapper ../data/pool15/407_CTCGACTT-GGTCAGAT_L00M_R1_001.fastq.gz ../data/pool15/407_CTCGACTT-GGTCAGAT_L00M_R2_001.fastq.gz
 13	:	1658871987.152	     0.013	0	111	0	0	map_wrapper ../data/pool15/410_GAACGGTT-ATTCCTCC_L00M_R1_001.fastq.gz ../data/pool15/410_GAACGGTT-ATTCCTCC_L00M_R2_001.fastq.gz
+11	:	1658934271.437	     0.040	0	111	0	0	map_wrapper ../data/pool15/408_GTACACCT-CATGAGGA_L00M_R1_001.fastq.gz ../data/pool15/408_GTACACCT-CATGAGGA_L00M_R2_001.fastq.gz
+16	:	1658934271.784	     0.031	0	111	0	0	map_wrapper ../data/pool15/413_CAATGCGA-AGTTCGTC_L00M_R1_001.fastq.gz ../data/pool15/413_CAATGCGA-AGTTCGTC_L00M_R2_001.fastq.gz
+14	:	1658945089.397	     0.054	0	111	0	0	map_wrapper ../data/pool15/411_CCAGTTGA-ATGACGTC_L00M_R1_001.fastq.gz ../data/pool15/411_CCAGTTGA-ATGACGTC_L00M_R2_001.fastq.gz
+15	:	1658945101.275	     0.017	0	111	0	0	map_wrapper ../data/pool15/412_GTCATCGT-TTAAGCGG_L00M_R1_001.fastq.gz ../data/pool15/412_GTCATCGT-TTAAGCGG_L00M_R2_001.fastq.gz
+12	:	1658871987.138	110075.448	0	25	0	0	map_wrapper ../data/pool15/409_CCAAGGTT-GCTATCCT_L00M_R1_001.fastq.gz ../data/pool15/409_CCAAGGTT-GCTATCCT_L00M_R2_001.fastq.gz
+17	:	1658934271.975	 80113.338	0	25	0	0	map_wrapper ../data/pool15/414_GGTTGAAC-AACGTGGA_L00M_R1_001.fastq.gz ../data/pool15/414_GGTTGAAC-AACGTGGA_L00M_R2_001.fastq.gz
+20	:	1659031507.830	     0.115	0	111	0	0	map_wrapper ../data/pool15/417_CACGCAAT-ATGGAAGG_L00M_R1_001.fastq.gz ../data/pool15/417_CACGCAAT-ATGGAAGG_L00M_R2_001.fastq.gz
+19	:	1658945101.443	 89111.399	0	25	0	0	map_wrapper ../data/pool15/416_CGGCATTA-TGACTGAC_L00M_R1_001.fastq.gz ../data/pool15/416_CGGCATTA-TGACTGAC_L00M_R2_001.fastq.gz
+18	:	1659035106.945	     0.026	0	111	0	0	map_wrapper ../data/pool15/415_CTTCGGTT-CTCTGGTT_L00M_R1_001.fastq.gz ../data/pool15/415_CTTCGGTT-CTCTGGTT_L00M_R2_001.fastq.gz
