@@ -1,1 +1,4 @@
-./data
+
+./local/dataFromRemote/
+./local/dataDerived/
+./local/dataSummaries/
