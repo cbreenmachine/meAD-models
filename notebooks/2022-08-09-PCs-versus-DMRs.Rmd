@@ -1,0 +1,118 @@
+---
+title: "Effect of Principal Components on DMR calling"
+author: "Coleman Breen"
+date: '2022-08-09'
+output: html_document
+---
+
+
+```{r}
+library(DSS)
+library(tidyverse)
+library(data.table)
+library(fdrtool)
+
+idir <- "../data/07-counts-by-chrom-imputed-subset1/"
+```
+
+```{r}
+# Covariates to use that are not PCs
+base_covariates <- c("Gran", "CD4T", "CD8T", "Bcell", "Mono", 
+                     "BMI", "age_at_visit", "sex",
+                     "diagnostic_group")
+
+#--> Data loading
+blood.df <- fread(file.path(idir, "blood-cell-composition.csv"))
+master.df <- fread(file.path(idir, "master.csv"))
+PCs <- fread(file.path(idir,"chr18.PCs.bed"))
+
+
+#--> Put into one fata frame with all the covariate info
+df <- full_join(blood.df, master.df, by = c("sample" = "RA_id")) %>% 
+  full_join(PCs, by = c("sample" = "sample_id")) %>% 
+  mutate(diagnostic_group = factor(diagnostic_group, levels = c("Control", "LOAD"))) %>%
+  column_to_rownames("sample") %>% 
+  dplyr::select(all_of(base_covariates), starts_with("PC"))
+names(df)
+```
+
+
+
+```{r}
+df[rowSums(is.na(df) > 0), ]
+```
+
+
+
+```{r}
+M <- fread(file.path(idir, "chr18.M.bed"))
+Cov <- fread(file.path(idir, "chr18.Cov.bed"))
+
+if (all(rownames(df) == names(M)[-1])){
+    print("Sample order is correct...")
+}
+```
+
+
+```{r}
+# create bs seq object, needs chromosome identiifer, methylated reads, and unmethylated reads
+bs <- BSseq(chr = rep("chr18", nrow(M)), pos = M$chromStart,
+            M = as.matrix(M[ , -c("chromStart"), with=FALSE]), 
+            Cov = as.matrix(Cov[, -c("chromStart"), with=FALSE]), 
+            sampleNames = names(M)[-1])
+
+rm(M, Cov)
+gc()
+```
+
+
+```{r}
+pc_sweep <- c(2, 5, seq(from=10, to=60, by=10))
+print(pc_sweep)
+
+for (ii in 1:length(pc_sweep)){
+  num_pcs = pc_sweep[ii]
+  covariates <- c(base_covariates, paste0("PC", 1:num_pcs))
+  dss.formula <- formula(
+    paste0(c("~diagnostic_group", covariates), collapse="+")
+  )
+
+  dml.fit <- DMLfit.multiFactor(
+    bs, design = df, smoothing = TRUE,
+    smoothing.span = 150, formula = dss.formula
+  )
+  
+
+  
+  
+  tmp <- DMLtest.multiFactor(dml.fit, coef = "diagnostic_groupLOAD")$pvals  
+  
+  ofile <- paste("PC", num_pcs, "pvals", "bed", sep=".")
+  fwrite(x = list(tmp), file = ofile)
+  
+  # Hate that this is necessary
+  rm(dml.fit, tmp)
+  gc()
+  
+  print("***Finished iteration***")
+}
+```
+
+Adjust the above to only run if ofile does not exist...
+
+Now for p-value adjustment
+
+
+```{r}
+
+correct_pvals <- function(pp){
+
+    # Extract test statistic and adjust
+    zz <- (pp - mean(pp)) / sd(pp)
+    out <- fdrtool(zz, statistic = "normal", plot = FALSE)
+    return(out$lfdr)
+}
+
+```
+
+
