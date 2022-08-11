@@ -13,6 +13,7 @@ files="call_$(basename ${idir})_bams"
 find "${idir}" -type f -name [0-9][0-9][0-9].bam | sort > ${files}
 
 call_wrapper(){
+
     # Keep in function so it exports
     ref_path=../../reference/GENCODE/h38_no_alt.fa
 
@@ -25,7 +26,7 @@ call_wrapper(){
         # bcftools
         samtools view -h -f 2 "${ifile}" \
             | bs_call --reference "${ref_path}" -L4 \
-            | bcftools view -Ob "${ofile}"
+            | bcftools view -Ob - > "${ofile}"
 
         # Also index the output bcf
         bcftools index "${ofile}"

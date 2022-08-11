@@ -15,24 +15,18 @@ sort_wrapper(){
     ofile=$(echo ${ifile} | sed 's/unsorted\.sam/bam/')
     json=$(echo ${ifile} | sed 's/unsorted\.sam/json/')
     
-
     # First check if ofile exists, if it does no need to sort
     if ! [[ -f "${ofile}" ]]; then
-        
         # Then check if json is there (this means mapping ran successfully)
         if [[ -f "${json}" ]]; then
-            echo ${ifile} ${ofile}
+            echo "${ofile} does not exist, will sort."
             samtools sort -@4 -m4g "${ifile}" -o "${ofile}"
         else
-            echo "${ofile} does not have json; re-map if you want to run sorting"
+            echo "${ifile} does not have json; re-map if you want to run sorting"
         fi
     else
         echo "${ofile} already exists; delete if you want to run sorting"
-    fi
-    
-    
-
-    
+    fi    
 }
 
 
@@ -40,7 +34,7 @@ log="sorting-$(basename ${idir}).log"
 
 export -f sort_wrapper
 
-parallel --link --workdir . \
+~/bin/parallel --link --workdir . \
     --jobs "${njobs}" --joblog "${log}" \
     sort_wrapper {1} :::: "${sort_file}"
 

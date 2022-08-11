@@ -4,7 +4,7 @@ import os
 import numpy as np
 from sklearn.decomposition import IncrementalPCA
 
-os.chdir('/z/Comp/kelesgroup/loadmethyseq/methylome-diff-analysis/scripts-v2/')
+# os.chdir('/z/Comp/kelesgroup/loadmethyseq/methylome-diff-analysis/scripts-v2/')
 
 def read_file(ifile):
     z = pd.read_csv(ifile, sep = "\t")
@@ -41,8 +41,8 @@ def impute_col_mean(df, columns):
         df[c].fillna(m, inplace=True)
 
 
-def run_pca(X, n_components = 20):
-    '''computes principal components incremntally
+def run_pca(X, n_components = 70):
+    '''computes principal components incrementally
     '''
     #TODO: allow for normal PCA
     ipca = IncrementalPCA(n_components = n_components, batch_size=10000)
@@ -139,10 +139,10 @@ def main(args):
 
   
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser = argparse.ArgumentParser(description='Impute missing values and compute principal components')
     parser.add_argument('--idir', default = '../data/06-counts-by-chrom/') 
     parser.add_argument('--samples_file', default = '../data/07-counts-by-chrom-imputed-subset1/master-42-subsampled-1.csv')
-    parser.add_argument('--chrom', default = "chr22")
+    parser.add_argument('--chrom', default = "chr18")
     parser.add_argument('--odir', default = '../data/07-counts-by-chrom-imputed-subset1/')
     args = parser.parse_args()
 
