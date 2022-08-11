@@ -1,0 +1,21 @@
+Seq	Host	Starttime	JobRuntime	Send	Receive	Exitval	Signal	Command
+2	:	1659015987.219	 12027.187	0	55	0	0	sort_wrapper ../data/pool17/435.unsorted.sam
+1	:	1659015987.211	 12236.664	0	55	0	0	sort_wrapper ../data/pool17/434.unsorted.sam
+3	:	1659015987.227	 14607.358	0	55	0	0	sort_wrapper ../data/pool17/436.unsorted.sam
+5	:	1659028223.936	 12780.274	0	55	0	0	sort_wrapper ../data/pool17/438.unsorted.sam
+4	:	1659028014.562	 14645.665	0	55	0	0	sort_wrapper ../data/pool17/437.unsorted.sam
+6	:	1659030594.713	 15425.093	0	55	0	0	sort_wrapper ../data/pool17/439.unsorted.sam
+7	:	1659041005.346	 15043.779	0	55	0	0	sort_wrapper ../data/pool17/440.unsorted.sam
+8	:	1659042661.208	 14623.182	0	55	0	0	sort_wrapper ../data/pool17/441.unsorted.sam
+9	:	1659046020.225	 12725.843	0	55	0	0	sort_wrapper ../data/pool17/442.unsorted.sam
+10	:	1659056050.070	 12079.320	0	55	0	0	sort_wrapper ../data/pool17/443.unsorted.sam
+12	:	1659058747.031	 12269.326	0	55	0	0	sort_wrapper ../data/pool17/445.unsorted.sam
+11	:	1659057284.754	 13769.972	0	55	0	0	sort_wrapper ../data/pool17/444.unsorted.sam
+13	:	1659068129.887	 11646.606	0	55	0	0	sort_wrapper ../data/pool17/446.unsorted.sam
+15	:	1659071055.140	 11189.728	0	55	0	0	sort_wrapper ../data/pool17/448.unsorted.sam
+14	:	1659071017.008	 12902.771	0	55	0	0	sort_wrapper ../data/pool17/447.unsorted.sam
+16	:	1659079777.011	 11675.401	0	55	0	0	sort_wrapper ../data/pool17/449.unsorted.sam
+17	:	1659082246.935	 11626.276	0	55	0	0	sort_wrapper ../data/pool17/451.unsorted.sam
+18	:	1659083921.253	 11196.217	0	55	0	0	sort_wrapper ../data/pool17/452.unsorted.sam
+19	:	1659091453.035	 10011.217	0	55	0	0	sort_wrapper ../data/pool17/453.unsorted.sam
+20	:	1659093873.773	 12463.427	0	55	0	0	sort_wrapper ../data/pool17/454.unsorted.sam
