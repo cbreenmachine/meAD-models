@@ -1,7 +1,4 @@
-
-<<<<<<< HEAD
 ./dataReference/
-=======
 *.cov
 *.pdf
 *.png
@@ -25,7 +22,6 @@
 analysis/2022-01-notebook.md
 
 
->>>>>>> ed245ce5a075633a8fec2caaa3bae23b01f7fd62
 ./local/dataFromRemote/
 ./local/dataDerived/
 ./local/dataSummaries/
