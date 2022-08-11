@@ -1,4 +1,11 @@
 
+./dataReference/
 ./local/dataFromRemote/
 ./local/dataDerived/
 ./local/dataSummaries/
+
+*bed
+*csv
+*tsv
+*RData
+
