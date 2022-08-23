@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+./dataReference/
 *.cov
 *.pdf
 *.png
@@ -20,9 +20,14 @@
 *.csv
 
 analysis/2022-01-notebook.md
-=======
+
 
 ./local/dataFromRemote/
 ./local/dataDerived/
 ./local/dataSummaries/
->>>>>>> f3b57190df3ec18f1f0d60ea0024c7a7dd823113
+
+*bed
+*csv
+*tsv
+*RData
+

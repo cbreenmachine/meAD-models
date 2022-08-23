@@ -1,0 +1,21 @@
+Seq	Host	Starttime	JobRuntime	Send	Receive	Exitval	Signal	Command
+1	:	1659109087.442	     0.001	0	111	0	0	map_wrapper ../data/pool19/479_GTAAGGTG-GCAATTCG_L00M_R1_001.fastq.gz ../data/pool19/479_GTAAGGTG-GCAATTCG_L00M_R2_001.fastq.gz
+2	:	1659109087.470	     0.022	0	111	0	0	map_wrapper ../data/pool19/480_CGAGAGAA-TCTCTTCC_L00M_R1_001.fastq.gz ../data/pool19/480_CGAGAGAA-TCTCTTCC_L00M_R2_001.fastq.gz
+3	:	1659109087.482	     0.035	0	111	0	0	map_wrapper ../data/pool19/481_CGCAACTA-GAATCCGA_L00M_R1_001.fastq.gz ../data/pool19/481_CGCAACTA-GAATCCGA_L00M_R2_001.fastq.gz
+4	:	1659109087.492	     0.089	0	111	0	0	map_wrapper ../data/pool19/482_CACAGACT-TGGTACAG_L00M_R1_001.fastq.gz ../data/pool19/482_CACAGACT-TGGTACAG_L00M_R2_001.fastq.gz
+5	:	1659109087.518	     0.190	0	111	0	0	map_wrapper ../data/pool19/483_TGGAAGCA-GTACTCTC_L00M_R1_001.fastq.gz ../data/pool19/483_TGGAAGCA-GTACTCTC_L00M_R2_001.fastq.gz
+6	:	1659109087.581	     0.171	0	111	0	0	map_wrapper ../data/pool19/484_CAATAGCC-TGCGTAGA_L00M_R1_001.fastq.gz ../data/pool19/484_CAATAGCC-TGCGTAGA_L00M_R2_001.fastq.gz
+7	:	1659109087.707	     0.046	0	111	0	0	map_wrapper ../data/pool19/485_CTCGAACA-GGAATTGC_L00M_R1_001.fastq.gz ../data/pool19/485_CTCGAACA-GGAATTGC_L00M_R2_001.fastq.gz
+8	:	1659109087.751	     0.095	0	111	0	0	map_wrapper ../data/pool19/486_GGCAAGTT-CTTCTGAG_L00M_R1_001.fastq.gz ../data/pool19/486_GGCAAGTT-CTTCTGAG_L00M_R2_001.fastq.gz
+9	:	1659109087.846	     0.042	0	111	0	0	map_wrapper ../data/pool19/487_AGCTACCA-CTTAGGAC_L00M_R1_001.fastq.gz ../data/pool19/487_AGCTACCA-CTTAGGAC_L00M_R2_001.fastq.gz
+10	:	1659109087.871	     0.059	0	111	0	0	map_wrapper ../data/pool19/488_CAGCATAC-TCTAACGC_L00M_R1_001.fastq.gz ../data/pool19/488_CAGCATAC-TCTAACGC_L00M_R2_001.fastq.gz
+11	:	1659109087.888	     0.042	0	111	0	0	map_wrapper ../data/pool19/489_CGTATCTC-GTACCTTG_L00M_R1_001.fastq.gz ../data/pool19/489_CGTATCTC-GTACCTTG_L00M_R2_001.fastq.gz
+14	:	1659109087.973	     0.020	0	111	0	0	map_wrapper ../data/pool19/492_AAGACACC-TCGGTTAC_L00M_R1_001.fastq.gz ../data/pool19/492_AAGACACC-TCGGTTAC_L00M_R2_001.fastq.gz
+15	:	1659109088.027	     0.019	0	111	0	0	map_wrapper ../data/pool19/493_CAACTCCA-ACGGATTC_L00M_R1_001.fastq.gz ../data/pool19/493_CAACTCCA-ACGGATTC_L00M_R2_001.fastq.gz
+16	:	1659109088.132	     0.025	0	111	0	0	map_wrapper ../data/pool19/494_GATCTTGC-TGCTCATG_L00M_R1_001.fastq.gz ../data/pool19/494_GATCTTGC-TGCTCATG_L00M_R2_001.fastq.gz
+12	:	1659109087.930	 12431.325	0	25	1	0	map_wrapper ../data/pool19/490_TTACGTGC-CAAGGTCT_L00M_R1_001.fastq.gz ../data/pool19/490_TTACGTGC-CAAGGTCT_L00M_R2_001.fastq.gz
+18	:	1659121519.335	 10809.517	0	25	1	0	map_wrapper ../data/pool19/496_CTCGACTT-GGTCAGAT_L00M_R1_001.fastq.gz ../data/pool19/496_CTCGACTT-GGTCAGAT_L00M_R2_001.fastq.gz
+13	:	1659109087.957	 26780.473	0	25	1	0	map_wrapper ../data/pool19/491_AGCTAAGC-GTAACGAC_L00M_R1_001.fastq.gz ../data/pool19/491_AGCTAAGC-GTAACGAC_L00M_R2_001.fastq.gz
+17	:	1659109088.196	 26783.020	0	25	1	0	map_wrapper ../data/pool19/495_CTTCACTG-GTCCTAAG_L00M_R1_001.fastq.gz ../data/pool19/495_CTTCACTG-GTCCTAAG_L00M_R2_001.fastq.gz
+20	:	1659135869.494	  3614.440	0	25	1	0	map_wrapper ../data/pool19/498_CCAAGGTT-GCTATCCT_L00M_R1_001.fastq.gz ../data/pool19/498_CCAAGGTT-GCTATCCT_L00M_R2_001.fastq.gz
+19	:	1659132329.144	  7155.491	0	25	1	0	map_wrapper ../data/pool19/497_GTACACCT-CATGAGGA_L00M_R1_001.fastq.gz ../data/pool19/497_GTACACCT-CATGAGGA_L00M_R2_001.fastq.gz
