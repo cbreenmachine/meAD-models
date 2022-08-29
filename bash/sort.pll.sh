@@ -33,11 +33,11 @@ sort_wrapper(){
     fi    
 }
 
-log="sorting-$(basename ${idir}).log"
+log="./logs/sorting-$(basename ${idir}).log"
 
 export -f sort_wrapper
 
-~/bin/parallel --link --workdir . \
+parallel --link --workdir . \
     --jobs "${njobs}" --joblog "${log}" \
     sort_wrapper {1} :::: "${sort_file}"
 

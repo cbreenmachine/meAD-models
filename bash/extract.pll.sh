@@ -5,10 +5,9 @@
 # Runs like `./call.pll.sh ../data/pool17/ 10`
 # Runs in gem environment--need parallel, bcftools, and samtools
 # Indexing takes ~10-15 mins
-
 idir="${1}"
 njobs="${2}"
-
+odir=../dataDerived/methylBedBySample/
 
 files="extract_$(basename ${idir})_bcfs"
 find "${idir}" -type f -name "*bcf" -size +15G -mmin +30 | sort > ${files}
@@ -16,7 +15,11 @@ find "${idir}" -type f -name "*bcf" -size +15G -mmin +30 | sort > ${files}
 extract_wrapper(){
     # e.g. ../data/pool01/110.bcf
     ifile="${1}"
-    ofile=$(echo ${ifile} | sed s/bcf/bed/)
+    odir="${2}"
+
+    # Derive output name by replacing bcf with bed, 
+    # swapping out directory name
+    ofile=$(echo "${odir}$(basename $ifile bcf)bed")
    
     if ! [[ -f "${ofile}" ]]; then
         bcftools query \
@@ -26,11 +29,12 @@ extract_wrapper(){
     else
         echo "${ofile} already exists, delete if you want to process"        
     fi
+    
 }
 
-log="extract-$(basename ${idir}).log"
+log="./logs/extract-$(basename ${idir}).log"
 
 export -f extract_wrapper
 parallel --link --workdir . \
     --jobs "${njobs}" --joblog "${log}" \
-    extract_wrapper {1} :::: ${files}
+    extract_wrapper {1} "${odir}" :::: ${files}

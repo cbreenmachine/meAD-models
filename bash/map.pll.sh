@@ -46,19 +46,18 @@ map_wrapper(){
     fi
 }
 
-log="mapping-$(basename ${idir}).log"
+log="./logs/mapping-$(basename ${idir}).log"
 export -f map_wrapper
-
 
 if [[ -f "${log}" ]];
 then
     echo "Running failed jobs from log file"
-    ~/bin/parallel --retry-failed --joblog "${log}" --jobs "${njobs}"
+    parallel --retry-failed --joblog "${log}" --jobs "${njobs}"
 else
     echo "Running from scratch. Won't map files with jsons"
-    ~/bin/parallel --link --workdir . \
-            --jobs "${njobs}" --joblog "${log}" \
-            map_wrapper {1} {2} :::: ${left_file} :::: ${right_file}
+    parallel --link --workdir . \
+        --jobs "${njobs}" --joblog "${log}" \
+        map_wrapper {1} {2} :::: ${left_file} :::: ${right_file}
 fi
 
 rm "${left_file}" "${right_file}"
