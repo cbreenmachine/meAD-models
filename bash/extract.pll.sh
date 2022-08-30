@@ -9,7 +9,7 @@ idir="${1}"
 njobs="${2}"
 
 files="extract_$(basename ${idir})_bcfs"
-find "${idir}" -type f -name "*bcf" -size +15G -mmin +30 | sort > ${files}
+find "${idir}" -type f -name "*bcf" -size +14G -mmin +30 | sort > ${files}
 
 extract_wrapper(){
     # e.g. ../data/pool01/110.bcf
@@ -28,8 +28,7 @@ extract_wrapper(){
         | python extract_from_bcf.py --ofile "${ofile}" --merge
     else
         echo "${ofile} already exists, delete if you want to process"        
-    fi
-    
+    fi  
 }
 
 log="./logs/extract-$(basename ${idir}).log"
