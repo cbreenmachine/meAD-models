@@ -37,9 +37,12 @@ call_wrapper(){
     fi
 }
 
-log="calling-$(basename ${idir}).log"
+log="./logs/calling-$(basename ${idir}).log"
 
 export -f call_wrapper
 parallel --link --workdir . \
     --jobs "${njobs}" --joblog "${log}" \
     call_wrapper {1} :::: ${files}
+    
+rm "${files}"
+#END

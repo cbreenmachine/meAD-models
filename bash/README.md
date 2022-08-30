@@ -18,6 +18,22 @@ Run in (wgbs). This is the final step and takes the most pertinent information (
 
 To prevent search-path issues, `extract_from_bcf.py` is stored in this (bash) directory. This is mostly for clarity, but may change as the project evolves. As many will recognize immediately, increasing the chunksize like `df.to_csv(args.ofile, sep='\t', chunksize=30000000)` is extremely important to speed. The `bcftools query` command takes about one hour to write to a text file (assumption is that writing is making about something like half of this). The python script with the chunksize modification runs in <8 minutes (as opposed to 5 hours on default).
 
+For some mystical reason, the following code block (note the exclusion filter) works.
+```
+bcftools query \
+    --regions chr1 \
+    --format '%CHROM\t%POS\t[%CS]\t%REF\t[%MC8{4}]\t[%MC8{5}]\t[%MC8{6}]\t[%MC8{7}]\n' \
+    --exclude 'CG="N" | CG="H" | CG="?"' ../data/pool20/499.bcf 
+```
+while its equivalent (*inclusion* filter) does not
+
+```
+bcftools query \
+    --regions chr1 \
+    --format '%CHROM\t%POS\t[%CS]\t%REF\t[%MC8{4}]\t[%MC8{5}]\t[%MC8{6}]\t[%MC8{7}]\n' \
+    --exclude 'DP<=2 | DP>=50 | CG="N" | CG="H" | CG="?"' "${ifile}" 
+```
+
 ## SNP-extraction
 
 TBD, but we'll need to pull out SNP information. 
