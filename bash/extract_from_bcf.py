@@ -1,5 +1,5 @@
 # extract_from_bcf.py
-# Broadly speaking, takes bcf output by gemBS and puts it into bed form
+# Broadly speaking, takes bcf output by gemBS and puts it into bed form.
 
 # Piped from bcftools query:
 # %CHROM\t%POS\t[%CS]\t%REF\t[%MC8{4}]\t[%MC8{5}]\t[%MC8{6}]\t[%MC8{7}]\n
@@ -46,24 +46,26 @@ def merge_strands(data):
     # strand is turned into +/-
     # And sequence comes from first row in grouping (top strand CpG)
     df = (df.groupby(by = ['chrom', 'chromStart', 'chromEnd']) \
-    .agg({'strand': '/'.join, 'methylated': 'sum', 'unmethylated': 'sum', 'coverage': 'sum'})) #, 'sequence': lambda x: x.iloc[0]}))
+    .agg({'strand': '/'.join, 'methylated': 'sum', 'unmethylated': 'sum', 'coverage': 'sum'})) 
 
     return(df)
 
 
 def main(args):
     df = read_data(args.ifile)
+    # print("Read in data")
 
     df['methylated'] = np.where(df['strand'] == "+", df['num_C'], df['num_G'])
     df['unmethylated'] = np.where(df['strand'] == "+", df['num_T'], df['num_A'])
     df['coverage'] = df['methylated'] + df['unmethylated']
+    # print("Got columns an such in order")
     
-
     if args.merge:
         df = merge_strands(df)
+    # print("Merged across strands if requested")
 
     df.drop(["unmethylated"], axis=1, inplace=True)
-    df.to_csv(args.ofile, sep='\t')
+    df.to_csv(args.ofile, sep='\t', chunksize=30000000)
 
 
 

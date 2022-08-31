@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ref_file=../data/study-data/experimental-design.tsv
+ref_file=../dataDerived/masterSamplesheet.csv
 
 > processed.txt
 for zz in $(find ../data/ -name *am | rev | cut -d '/' -f1 | rev | cut -d '.' -f1 | sort |uniq);
@@ -9,10 +9,6 @@ do
 done
 
 cat processed.txt | tr -s ' ' | cut -d ' '  -f3 | sort | uniq -c
-
-
-
-ref_file=../data/sample-info/master-samplesheet.csv
 
 > processed.txt
 for zz in $(find ../data/ -name *am | rev | cut -d '/' -f1 | rev | cut -d '.' -f1 | sort |uniq);
