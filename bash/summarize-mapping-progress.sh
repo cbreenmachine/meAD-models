@@ -2,21 +2,25 @@
 
 ref_file=../dataDerived/masterSamplesheet.csv
 
-> processed.txt
-for zz in $(find ../data/ -name *am | rev | cut -d '/' -f1 | rev | cut -d '.' -f1 | sort |uniq);
-do
-    grep "${zz}" "${ref_file}"  >> processed.txt
-done
+tmp_ref_file=./tmpRef.csv
 
-cat processed.txt | tr -s ' ' | cut -d ' '  -f3 | sort | uniq -c
+cat ${ref_file} | cut -d ',' -f1,3 | sort | uniq > ${tmp_ref_file}
 
 > processed.txt
 for zz in $(find ../data/ -name *am | rev | cut -d '/' -f1 | rev | cut -d '.' -f1 | sort |uniq);
 do
-    grep "^${zz}," "${ref_file}"  >> processed.txt
+    grep "${zz}" "${tmp_ref_file}"  >> processed.txt
 done
-cat processed.txt  |cut -d  ","  -f26 | sort | uniq -c
 
-rm processed.txt
+cat processed.txt | cut -d ','  -f2 | sort | uniq -c
+
+#> processed.txt
+#for zz in $(find ../data/ -name *am | rev | cut -d '/' -f1 | rev | cut -d '.' -f1 | sort |uniq);
+#do
+#    grep "^${zz}," "${ref_file}"  >> processed.txt
+#done
+#cat processed.txt  |cut -d  ","  -f26 | sort | uniq -c
+
+#rm processed.txt
 
 #END

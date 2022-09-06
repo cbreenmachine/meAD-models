@@ -1,0 +1,21 @@
+Seq	Host	Starttime	JobRuntime	Send	Receive	Exitval	Signal	Command
+1	:	1661890019.544	     0.014	0	87	0	0	extract_wrapper ../data/pool06/201.bcf
+2	:	1661890019.558	     0.042	0	87	0	0	extract_wrapper ../data/pool06/204.bcf
+3	:	1661890019.601	     0.090	0	87	0	0	extract_wrapper ../data/pool06/205.bcf
+4	:	1661890019.691	     0.061	0	87	0	0	extract_wrapper ../data/pool06/206.bcf
+5	:	1661890019.740	     0.013	0	87	0	0	extract_wrapper ../data/pool06/207.bcf
+6	:	1661890019.751	     0.130	0	87	0	0	extract_wrapper ../data/pool06/209.bcf
+7	:	1661890019.827	     0.106	0	87	0	0	extract_wrapper ../data/pool06/211.bcf
+8	:	1661890019.838	     0.096	0	87	0	0	extract_wrapper ../data/pool06/212.bcf
+9	:	1661890019.853	     0.083	0	87	0	0	extract_wrapper ../data/pool06/213.bcf
+10	:	1661890019.869	     0.067	0	87	0	0	extract_wrapper ../data/pool06/214.bcf
+11	:	1661890019.933	     0.026	0	87	0	0	extract_wrapper ../data/pool06/215.bcf
+12	:	1661890019.960	     0.075	0	87	0	0	extract_wrapper ../data/pool06/219.bcf
+13	:	1661890020.035	     0.059	0	87	0	0	extract_wrapper ../data/pool06/220.bcf
+14	:	1661890020.094	     0.040	0	87	0	0	extract_wrapper ../data/pool06/221.bcf
+15	:	1661890020.124	     0.056	0	87	0	0	extract_wrapper ../data/pool06/222.bcf
+16	:	1661890020.134	     0.049	0	87	0	0	extract_wrapper ../data/pool06/223.bcf
+17	:	1661890020.181	     0.049	0	87	0	0	extract_wrapper ../data/pool06/224.bcf
+18	:	1661890020.230	     0.019	0	87	0	0	extract_wrapper ../data/pool06/225.bcf
+19	:	1661890020.248	     0.038	0	87	0	0	extract_wrapper ../data/pool06/226.bcf
+20	:	1661890020.281	     0.016	0	87	0	0	extract_wrapper ../data/pool06/227.bcf

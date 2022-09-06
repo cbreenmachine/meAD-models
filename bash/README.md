@@ -25,7 +25,7 @@ bcftools query \
     --format '%CHROM\t%POS\t[%CS]\t%REF\t[%MC8{4}]\t[%MC8{5}]\t[%MC8{6}]\t[%MC8{7}]\n' \
     --exclude 'CG="N" | CG="H" | CG="?"' ../data/pool20/499.bcf 
 ```
-while its equivalent (*inclusion* filter) does not
+while its equivalent (*inclusion* filter) does not.
 
 ```
 bcftools query \
@@ -33,6 +33,8 @@ bcftools query \
     --format '%CHROM\t%POS\t[%CS]\t%REF\t[%MC8{4}]\t[%MC8{5}]\t[%MC8{6}]\t[%MC8{7}]\n' \
     --exclude 'DP<=2 | DP>=50 | CG="N" | CG="H" | CG="?"' "${ifile}" 
 ```
+
+It takes 20-25 mins to query (and print to nothing), and about 8 mins to extract.
 
 ## SNP-extraction
 
