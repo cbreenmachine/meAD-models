@@ -3,16 +3,13 @@
 idir="${1}"
 njobs="${2}"
 
-export PATH="~/miniconda3/envs/gem/bin/:$PATH"
+# export PATH="~/miniconda3/envs/gem/bin/:$PATH"
 
 # Where we store the files to be sorted
 sort_file="sort_$(basename ${idir})"
 
 # mtime makes sure the file was edited more than one hour ago...
 find "${idir}" -type f -name "*unsorted.sam" -mmin +60 | sort > "${sort_file}"
-
-
-#TODO: clean filename function
 
 sort_wrapper(){
     ifile="${1}"

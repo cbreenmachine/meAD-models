@@ -7,7 +7,7 @@ tmp_ref_file=./tmpRef.csv
 cat ${ref_file} | cut -d ',' -f1,3 | sort | uniq > ${tmp_ref_file}
 
 > processed.txt
-for zz in $(find ../data/ -name *am | rev | cut -d '/' -f1 | rev | cut -d '.' -f1 | sort |uniq);
+for zz in $(find ../data/ -name *bam | rev | cut -d '/' -f1 | rev | cut -d '.' -f1 | sort |uniq);
 do
     grep "${zz}" "${tmp_ref_file}"  >> processed.txt
 done
