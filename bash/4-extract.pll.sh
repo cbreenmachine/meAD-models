@@ -1,8 +1,8 @@
 #!/bin/bash
 # extract.pll.sh
+# run in wgbs, need working bcftools, pandas
 # bcf variant call files
-# Runs like `./call.pll.sh ../data/pool17/ 10`
-# Runs in gem environment--need parallel, bcftools, and samtools
+# Runs like `./4-extract.pll.sh ../data 10`
 # Indexing takes ~10-15 mins
 idir="${1}"
 njobs="${2}"

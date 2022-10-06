@@ -29,6 +29,9 @@ def read_data(path, col_names=COLNAMES):
     # Cleaning
     df.dropna(inplace = True)
     df.drop_duplicates(inplace = True)
+
+    # chromEnd is not inclusive. A CpG on first position
+    # of chromosome would be chr1:0-2
     df['chromEnd'] = df['chromStart'] + 2
     return(df)
 
