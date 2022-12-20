@@ -13,7 +13,6 @@ suppressPackageStartupMessages({
     library(networkD3)
     library(rbokeh)
     library(waffle)
-
 }) 
 
 source("../functions.R")
