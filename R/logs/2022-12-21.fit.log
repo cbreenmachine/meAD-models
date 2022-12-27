@@ -1,0 +1,23 @@
+Seq	Host	Starttime	JobRuntime	Send	Receive	Exitval	Signal	Command
+1	:	1671647106.064	  3200.185	0	67	0	9	Rscript 1-fit-DSS-models.R --idir ../../dataDerived/analysis-controlLOAD/ --chr chr1 --test_covariate diagnostic_group_coded
+2	:	1671647106.120	  5646.315	0	67	0	9	Rscript 1-fit-DSS-models.R --idir ../../dataDerived/analysis-controlLOAD/ --chr chr2 --test_covariate diagnostic_group_coded
+4	:	1671647106.202	 35242.723	0	230	0	0	Rscript 1-fit-DSS-models.R --idir ../../dataDerived/analysis-controlLOAD/ --chr chr4 --test_covariate diagnostic_group_coded
+3	:	1671647106.160	 38369.782	0	240	0	0	Rscript 1-fit-DSS-models.R --idir ../../dataDerived/analysis-controlLOAD/ --chr chr3 --test_covariate diagnostic_group_coded
+5	:	1671650306.347	 35757.448	0	230	0	0	Rscript 1-fit-DSS-models.R --idir ../../dataDerived/analysis-controlLOAD/ --chr chr5 --test_covariate diagnostic_group_coded
+6	:	1671652752.539	 34804.934	0	230	0	0	Rscript 1-fit-DSS-models.R --idir ../../dataDerived/analysis-controlLOAD/ --chr chr6 --test_covariate diagnostic_group_coded
+9	:	1671686063.820	 26161.864	0	200	0	0	Rscript 1-fit-DSS-models.R --idir ../../dataDerived/analysis-controlLOAD/ --chr chr9 --test_covariate diagnostic_group_coded
+8	:	1671685476.076	 30556.440	0	210	0	0	Rscript 1-fit-DSS-models.R --idir ../../dataDerived/analysis-controlLOAD/ --chr chr8 --test_covariate diagnostic_group_coded
+7	:	1671682348.978	 33710.128	0	230	0	0	Rscript 1-fit-DSS-models.R --idir ../../dataDerived/analysis-controlLOAD/ --chr chr7 --test_covariate diagnostic_group_coded
+10	:	1671687557.506	 29475.154	0	220	0	0	Rscript 1-fit-DSS-models.R --idir ../../dataDerived/analysis-controlLOAD/ --chr chr10 --test_covariate diagnostic_group_coded
+13	:	1671716059.117	 16798.208	0	162	0	0	Rscript 1-fit-DSS-models.R --idir ../../dataDerived/analysis-controlLOAD/ --chr chr13 --test_covariate diagnostic_group_coded
+14	:	1671717032.703	 19964.671	0	171	0	0	Rscript 1-fit-DSS-models.R --idir ../../dataDerived/analysis-controlLOAD/ --chr chr14 --test_covariate diagnostic_group_coded
+11	:	1671712225.738	 31883.093	0	210	0	0	Rscript 1-fit-DSS-models.R --idir ../../dataDerived/analysis-controlLOAD/ --chr chr11 --test_covariate diagnostic_group_coded
+12	:	1671716032.526	 30265.776	0	210	0	0	Rscript 1-fit-DSS-models.R --idir ../../dataDerived/analysis-controlLOAD/ --chr chr12 --test_covariate diagnostic_group_coded
+15	:	1671732857.344	 18770.773	0	171	0	0	Rscript 1-fit-DSS-models.R --idir ../../dataDerived/analysis-controlLOAD/ --chr chr15 --test_covariate diagnostic_group_coded
+16	:	1671736997.382	 23540.107	0	190	0	0	Rscript 1-fit-DSS-models.R --idir ../../dataDerived/analysis-controlLOAD/ --chr chr16 --test_covariate diagnostic_group_coded
+18	:	1671746298.321	 15008.871	0	153	0	0	Rscript 1-fit-DSS-models.R --idir ../../dataDerived/analysis-controlLOAD/ --chr chr18 --test_covariate diagnostic_group_coded
+21	:	1671761307.207	  7282.681	0	126	0	0	Rscript 1-fit-DSS-models.R --idir ../../dataDerived/analysis-controlLOAD/ --chr chr21 --test_covariate diagnostic_group_coded
+17	:	1671744108.850	 24530.152	0	200	0	0	Rscript 1-fit-DSS-models.R --idir ../../dataDerived/analysis-controlLOAD/ --chr chr17 --test_covariate diagnostic_group_coded
+20	:	1671760537.503	 15487.234	0	162	0	0	Rscript 1-fit-DSS-models.R --idir ../../dataDerived/analysis-controlLOAD/ --chr chr20 --test_covariate diagnostic_group_coded
+19	:	1671751628.136	 27227.942	0	190	0	0	Rscript 1-fit-DSS-models.R --idir ../../dataDerived/analysis-controlLOAD/ --chr chr19 --test_covariate diagnostic_group_coded
+22	:	1671768589.928	 12804.904	0	144	0	0	Rscript 1-fit-DSS-models.R --idir ../../dataDerived/analysis-controlLOAD/ --chr chr22 --test_covariate diagnostic_group_coded
