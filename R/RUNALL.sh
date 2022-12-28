@@ -28,5 +28,8 @@ date=$(date '+%Y-%m-%d')
 #         ::: $fit_idirs ::: $all_chroms ::: $test_vars
 
 # STEP 2: Extract p-values and pi (corrected methylation percentages)
-Rscript 2-extract-pi-and-pvals.R
-        --idir {1} 
+for ff in ${odir_range}; do
+        Rscript 2-extract-pi-and-pvals.R --idir ${ff} 
+done
+
+# 

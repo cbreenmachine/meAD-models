@@ -1,7 +1,6 @@
 # 3-exportDMPsAsBED.R
 suppressPackageStartupMessages({
     library(data.table)
-    library(tidyverse)
     library(argparse)
     library(DSS)
     library(parallel)
@@ -9,7 +8,7 @@ suppressPackageStartupMessages({
     library(EnsDb.Hsapiens.v86)
 })
 
-source("../get_expanded_ensdb.R")
+source("ensembl-genes.functions.R")
 
 ensdb.expanded <- get_expanded_ensdb(5000, 300)
 
@@ -22,14 +21,14 @@ lfdr.cut <- 0.05
 #Additional filter--at least one CpG in upper 75% of effect size
 #Or average
 parser <- ArgumentParser()
-parser$add_argument("--ifile", default= "../../dataDerived/analysis-controlLOAD/test-diagnostic-group-coded/experimentSummary/pvals.bed", help='Where are the models stored')
-parser$add_argument("--odir", default= "../../dataDerived/analysis-controlLOAD/test-diagnostic-group-coded/experimentSummary/", help='Where are the models stored')
+parser$add_argument("--ifile", default= "../DataDerived/ControlLOAD/test-diagnostic-group-coded/ExperimentSummary/pvals.bed", help='Where are the models stored')
+parser$add_argument("--odir", default= "../DataDerived/ControlLOAD/test-diagnostic-group-coded/ExperimentSummary/", help='Where are the models stored')
 args <- parser$parse_args()
 
 dir.create(args$odir, recursive=T)
 
-ofile.1 <- file.path(args$odir, "dmrs.all.bed")
-ofile.2 <- file.path(args$odir, "dmrs.filt.bed")
+ofile.1 <- file.path(args$odir, "DMRegions.bed")
+ofile.2 <- file.path(args$odir, "DMRegions-filtered.bed")
 
 # Read data and get into DSS-friendly form
 df <- fread(args$ifile) 
@@ -51,7 +50,6 @@ class(input.df)[2] <- "DMLtest.multiFactor"
 
 # Use DSS's DMR findeer
 dmrs <- DSS::callDMR(input.df, pct.sig = pct.sig)
-
 
 add_more_info_to_dmrs <- function(i){
     # Pull out the needed DMR ifnormation
@@ -95,4 +93,4 @@ dmrs.filt <- dmrs.all %>%
     dplyr::filter(persistent.effect | one.large.effect)
 
 fwrite(dmrs.filt, ofile.2, sep= "\t")
-
+#END

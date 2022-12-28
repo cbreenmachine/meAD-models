@@ -1,7 +1,7 @@
 # 3-extract-pi-and-pvals.R
 suppressPackageStartupMessages({
     library(data.table)
-    library(tidyverse)
+    library(magrittr)
     library(argparse)
     library(DSS)
     library(fdrtool)
@@ -13,18 +13,17 @@ suppressPackageStartupMessages({
 Rcpp::sourceCpp("matrix_multiply.cpp")
 
 parser <- ArgumentParser()
-parser$add_argument("--idir", default= "../../dataDerived/analysis-controlLOAD/test-diagnostic-group-coded/", help='Where are the models stored')
+parser$add_argument("--idir", default= "../DataDerived/ControlLOAD/test-diagnostic-group-coded/", help='Where are the models stored')
 args <- parser$parse_args()
 
 # Output directories
-last.dir <- "experimentSummary"
+last.dir <- "ExperimentSummary"
 odir <- file.path(args$idir, last.dir)
 print(paste0("Will write pvals.df, dmrs.df, and pi.df to ", odir))
 dir.create(odir, recursive=T, showWarn=F)
 
-# Load data
-all.files <-list.files(args$idir, pattern = "*RData", full=T)
-
+# Files to eventually load
+all.files <- list.files(args$idir, pattern = "*RData", full=T)
 
 compute_pi_for_cpg_i <- function(i, X, beta.mat){
     # helper function that calls KMP's matrix multiply script
@@ -70,8 +69,8 @@ compute_pi_diffs <- function(X, design.df, pi.df){
 
 make_pi_oname <- function(ifile){
     root <- file.path(dirname(ifile), last.dir)  
-    z <- str_replace(
-            str_replace(basename(ifile), "output", "pi"), 
+    z <- stringr::str_replace(
+            stringr::str_replace(basename(ifile), "output", "pi"), 
         "RData", "bed")
     file.path(root, z)
 }
@@ -132,37 +131,13 @@ stat.crct <- chisq / lambda
 # Correct by adjusting with genomic inflation 
 p.crct <- pchisq(stat.crct, df=1, lower.tail=FALSE)
 
+# Couple hundred p-values are stored as NA
+ix.na <- which(is.na(p.crct))
+p.crct[ix.na] <- 1
+
 # Couple hundred p-values are stored as zero
 ix.0 <- which(p.crct == 0)
 p.crct[ix.0] <-  min(p.crct[p.crct > 0])
-
-# Copy original df for use with DSS DMR calling
-# df.2 <- df
-
-# # this preserves sign for DSS DMR calling
-# df.2$stat <- df$stat / sqrt(lambda) 
-# df.2$pvals <- p.crct
-# class(df.2)[2] <- "DMLtest.multiFactor"
-
-# # Call DMRs
-# p.threshold <- 1e-5 # default, could make this smaller
-# pct.sig <- 0.95 # default is 0.5, so this is conservative
-
-# dmrs <- DSS::callDMR(df.2, p.threshold = p.threshold, pct.sig = pct.sig)
-
-# dmrs.out <- dmrs %>%
-#     dplyr::transmute(chrom = .pad_chrom(chr), chromStart = start, chromEnd = end+2,
-#         length, nCG, areaStat)
-
-# ofile <- file.path(args$odir, "dmrs.DSS.bed")
-
-# # Write out dmrs, first few lines look like
-# #DMRs called with DSS w/ default parameters unless otherwise specified
-# #P value threshold: 1e-05
-# #Percent significant: 0.95
-# # chrom	chromStart	chromEnd	length	nCG	areaStat
-# # chr02	159294967	159295097	131	10	-147.077920660184
-# fwrite(dmrs.out, ofile, sep="\t", append = T, col.names = T)
 
 
 ##############################################################
@@ -183,3 +158,5 @@ pvals.df$p.raw <- df$pvals
 
 ofile <- file.path(odir, "pvals.bed")
 fwrite(pvals.df, ofile, sep="\t")
+
+#END
