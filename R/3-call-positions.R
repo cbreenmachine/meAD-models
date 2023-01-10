@@ -6,9 +6,9 @@ suppressPackageStartupMessages({
 })
 
 parser <- ArgumentParser()
-parser$add_argument("--ifile", default= "../DataDerived/ControlLOAD/test-diagnostic-group-coded/ExperimentSummary/pvals.bed", help='Where are the models stored')
-parser$add_argument("--ofile", default= "../DataDerived/ControlLOAD/test-diagnostic-group-coded/ExperimentSummary/DMPs.bed", help='Where are the models stored')
-parser$add_argument("--ofile_dmps", default= "../DataDerived/ControlLOAD/test-diagnostic-group-coded/ExperimentSummary/DMPs-filtered.bed", help='Where are the models stored')
+parser$add_argument("--ifile", default= "../DataDerived/ControlLOAD/test-diagnostic-group-coded/pvals.bed", help='Where are the models stored')
+parser$add_argument("--ofile", default= "../DataDerived/ControlLOAD/test-diagnostic-group-coded/DMPs.bed", help='Where are the models stored')
+parser$add_argument("--ofile_dmps", default= "../DataDerived/ControlLOAD/test-diagnostic-group-coded/DMPs-filtered.bed", help='Where are the models stored')
 parser$add_argument("--fdr_cut", default = 0.05)
 parser$add_argument("--effect_cut", default = 0.5)
 args <- parser$parse_args()

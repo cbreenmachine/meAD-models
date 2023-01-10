@@ -17,7 +17,7 @@ parser$add_argument("--test_covariate", default= "diagnostic_group_coded")
 parser$add_argument("--smoothing", default= 150, help= 'Width of smoothing window')
 args <- parser$parse_args()
 
-ifile <- file.path(args$idir, paste0("input.", args$chr, ".RData"))
+ifile <- file.path(args$idir, paste0("input-", args$chr, ".RData"))
 
 ###########################################################
 ##################### Directory Manipulation ##############
