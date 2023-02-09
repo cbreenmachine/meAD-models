@@ -10,29 +10,30 @@ suppressPackageStartupMessages({
 })
 
 parser <- ArgumentParser()
-parser$add_argument("--idir", default= "../../dataDerived/analysis-controlLOAD/")
+parser$add_argument("--idir", default= "../DataDerived/ControlLOAD/Inputs/")
+parser$add_argument("--odir", default= "../DataDerived/ControlLOAD/test-diagnostic-group-coded/")
 parser$add_argument("--chr", default= "chr22")
 parser$add_argument("--baseline_covariates", default= "bmi,sex,age_at_visit,type1,type2,type3,type4,type5,PC1,PC2")
 parser$add_argument("--test_covariate", default= "diagnostic_group_coded")
 parser$add_argument("--smoothing", default= 150, help= 'Width of smoothing window')
 args <- parser$parse_args()
 
-ifile <- file.path(args$idir, paste0("input-", args$chr, ".RData"))
+ifile <- file.path(args$idir, paste0("filtered-DSS-inputs-", args$chr, ".RData"))
 
 ###########################################################
 ##################### Directory Manipulation ##############
 ###########################################################
 load(ifile)
 
-#Derive some output paths and such
-root_path <- dirname(ifile) #../dataDerived/analysis-controlVsLOAD
-sub_dir <- paste0("test-", str_replace_all(args$test_covariate, "_", "-")) # test-diagnostic-group-coded
+# Temp patch, fixed in 0-prepare
+# Should not have been storing a `args`
+args <- parser$parse_args()
 
 # Put the two paths together and create the output
-odir <- file.path(root_path, sub_dir) 
+odir <- args$odir
 dir.create(odir, showWarn=F, recursive=T)
 
-file_name <- str_replace(basename(ifile), "input", "output")
+file_name <- str_remove(str_replace(basename(ifile), "input", "output"), "filtered-")
 outname <- file.path(odir, file_name)
 
 ###########################################################
@@ -65,14 +66,13 @@ if (args$smoothing == 0){
     smooth = FALSE
 }
 
-
 # Fit models
 dml.fit <- DMLfit.multiFactor(bs.sub, design = design.df, smoothing = smooth, 
     smoothing.span = args$smoothing, formula = dss.formula)
 
 invisible(gc())
 
-#TODO: interpret this from command line args...
+# Test covariate (to start this will be LOAD status--diagnostic_group_coded)
 test.var <- args$test_covariate
 test.result <- DMLtest.multiFactor(dml.fit, coef = test.var)
 

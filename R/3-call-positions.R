@@ -6,18 +6,16 @@ suppressPackageStartupMessages({
 })
 
 parser <- ArgumentParser()
-parser$add_argument("--ifile", default= "../DataDerived/ControlLOAD/test-diagnostic-group-coded/pvals.bed", help='Where are the models stored')
-parser$add_argument("--ofile", default= "../DataDerived/ControlLOAD/test-diagnostic-group-coded/DMPs.bed", help='Where are the models stored')
-parser$add_argument("--ofile_dmps", default= "../DataDerived/ControlLOAD/test-diagnostic-group-coded/DMPs-filtered.bed", help='Where are the models stored')
+parser$add_argument("--ifile", default= "../DataDerived/ControlLOAD/test-diagnostic-group-coded/Summaries/pvals.bed", help='Where are the models stored')
+parser$add_argument("--ofile", default= "../DataDerived/ControlLOAD/test-diagnostic-group-coded/Summaries/DMPs.bed", help='Where are the models stored')
+parser$add_argument("--ofile_dmps", default= "../DataDerived/ControlLOAD/test-diagnostic-group-coded/Summaries/DMPs-high-effect.bed", help='Where are the models stored')
 parser$add_argument("--fdr_cut", default = 0.05)
-parser$add_argument("--effect_cut", default = 0.5)
+parser$add_argument("--effect_cut", default = 0.1)
 args <- parser$parse_args()
 
 LFDR.CUT <- as.numeric(args$fdr_cut)
 EFFECT.CUT <- as.numeric(args$effect_cut)
 
-# Create directory if needed
-dir.create(dirname(args$ifile), recursive=T, showWarn=F)
 
 ofile.1 <- args$ofile
 

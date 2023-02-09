@@ -12,12 +12,12 @@ suppressPackageStartupMessages({
 parser <- ArgumentParser()
 parser$add_argument(
     "--idir", 
-    default= "../DataDerived/ControlLOAD/test-diagnostic-group-coded/", 
+    default= "../DataDerived/ControlLOAD/test-diagnostic-group-coded/Pis/", 
     help='Where the pi files are stored')
 
 parser$add_argument(
     "--dmr_file", 
-    default= "../DataDerived/ControlLOAD/test-diagnostic-group-coded/DMRegions.bed", 
+    default= "../DataDerived/ControlLOAD/test-diagnostic-group-coded/Summaries/DMRegions.bed", 
     help='path to DMR file')
 args <- parser$parse_args()
 
@@ -27,7 +27,11 @@ dmrs <- fread(args$dmr_file) %>%
 end(dmrs) <- end(dmrs) + 1 # DSS doesn't know
 
 
-all.files <- list.files(args$idir, pattern = "pi\\.chr*", full=T)
+# all.files <- list.files(args$idir, pattern = "pi-chr*", full=T)
+
+tmp <- as.vector(unique(seqnames(dmrs)))
+all.files <- file.path(args$idir, paste0("DSS-pis-", tmp, ".bed"))
+
 
 cast_to_granges <- function(DT){
     makeGRangesFromDataFrame(DT, starts = T, keep.extra = T)

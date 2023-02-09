@@ -18,7 +18,7 @@ parser$add_argument(
 
 parser$add_argument(
     "--dmr_file", 
-    default= "../DataDerived/ControlLOAD/test-diagnostic-group-coded/DMRegions.bed", 
+    default= "../DataDerived/ControlLOAD/test-diagnostic-group-coded/Summaries/DMRegions.bed", 
     help='path to DMR file')
 args <- parser$parse_args()
 
@@ -72,7 +72,10 @@ pipeline <- function(ff, regions=dmrs){
 }
 
 
-all.files <- list.files(args$idir, pattern = "input*", full=T)
+# all.files <- list.files(args$idir, pattern = "input*", full=T)
+tmp <- as.vector(unique(seqnames(dmrs)))
+all.files <- file.path(args$idir, paste0("filtered-DSS-inputs-", tmp, ".RData"))
+
 out <- do.call(rbind, lapply(all.files, FUN=pipeline))
 ofile <- file.path(dirname(args$dmr_file), "DMRegions-CpGs.bed")
 fwrite(out, ofile, sep = "\t")
