@@ -1,0 +1,23 @@
+Seq	Host	Starttime	JobRuntime	Send	Receive	Exitval	Signal	Command
+4	:	1673392278.917	  4302.450	0	125	0	0	Rscript 0-prepare-DSS-inputs.R --idir ../DataRaw/MCovRawSplit/ --odir ../DataDerived/ControlLOAD/Inputs/ --chr chr4
+6	:	1673392278.928	  4346.391	0	125	0	0	Rscript 0-prepare-DSS-inputs.R --idir ../DataRaw/MCovRawSplit/ --odir ../DataDerived/ControlLOAD/Inputs/ --chr chr6
+5	:	1673392278.923	  4390.059	0	125	0	0	Rscript 0-prepare-DSS-inputs.R --idir ../DataRaw/MCovRawSplit/ --odir ../DataDerived/ControlLOAD/Inputs/ --chr chr5
+3	:	1673392278.910	  4636.507	0	125	0	0	Rscript 0-prepare-DSS-inputs.R --idir ../DataRaw/MCovRawSplit/ --odir ../DataDerived/ControlLOAD/Inputs/ --chr chr3
+2	:	1673392278.903	  5527.340	0	125	0	0	Rscript 0-prepare-DSS-inputs.R --idir ../DataRaw/MCovRawSplit/ --odir ../DataDerived/ControlLOAD/Inputs/ --chr chr2
+1	:	1673392278.898	  5937.147	0	125	0	0	Rscript 0-prepare-DSS-inputs.R --idir ../DataRaw/MCovRawSplit/ --odir ../DataDerived/ControlLOAD/Inputs/ --chr chr1
+9	:	1673396669.029	  2317.868	0	125	0	0	Rscript 0-prepare-DSS-inputs.R --idir ../DataRaw/MCovRawSplit/ --odir ../DataDerived/ControlLOAD/Inputs/ --chr chr9
+8	:	1673396625.358	  2753.582	0	125	0	0	Rscript 0-prepare-DSS-inputs.R --idir ../DataRaw/MCovRawSplit/ --odir ../DataDerived/ControlLOAD/Inputs/ --chr chr8
+7	:	1673396581.461	  3347.957	0	125	0	0	Rscript 0-prepare-DSS-inputs.R --idir ../DataRaw/MCovRawSplit/ --odir ../DataDerived/ControlLOAD/Inputs/ --chr chr7
+10	:	1673396915.439	  3430.196	0	126	0	0	Rscript 0-prepare-DSS-inputs.R --idir ../DataRaw/MCovRawSplit/ --odir ../DataDerived/ControlLOAD/Inputs/ --chr chr10
+13	:	1673398986.977	  1689.684	0	126	0	0	Rscript 0-prepare-DSS-inputs.R --idir ../DataRaw/MCovRawSplit/ --odir ../DataDerived/ControlLOAD/Inputs/ --chr chr13
+11	:	1673397806.288	  2908.820	0	126	0	0	Rscript 0-prepare-DSS-inputs.R --idir ../DataRaw/MCovRawSplit/ --odir ../DataDerived/ControlLOAD/Inputs/ --chr chr11
+12	:	1673398216.103	  2999.463	0	126	0	0	Rscript 0-prepare-DSS-inputs.R --idir ../DataRaw/MCovRawSplit/ --odir ../DataDerived/ControlLOAD/Inputs/ --chr chr12
+14	:	1673399379.039	  2132.115	0	126	0	0	Rscript 0-prepare-DSS-inputs.R --idir ../DataRaw/MCovRawSplit/ --odir ../DataDerived/ControlLOAD/Inputs/ --chr chr14
+15	:	1673399929.524	  1737.424	0	126	0	0	Rscript 0-prepare-DSS-inputs.R --idir ../DataRaw/MCovRawSplit/ --odir ../DataDerived/ControlLOAD/Inputs/ --chr chr15
+16	:	1673400345.721	  1988.046	0	126	0	0	Rscript 0-prepare-DSS-inputs.R --idir ../DataRaw/MCovRawSplit/ --odir ../DataDerived/ControlLOAD/Inputs/ --chr chr16
+21	:	1673401667.036	   806.293	0	126	0	0	Rscript 0-prepare-DSS-inputs.R --idir ../DataRaw/MCovRawSplit/ --odir ../DataDerived/ControlLOAD/Inputs/ --chr chr21
+18	:	1673400715.128	  1891.759	0	126	0	0	Rscript 0-prepare-DSS-inputs.R --idir ../DataRaw/MCovRawSplit/ --odir ../DataDerived/ControlLOAD/Inputs/ --chr chr18
+20	:	1673401511.269	  1451.942	0	126	0	0	Rscript 0-prepare-DSS-inputs.R --idir ../DataRaw/MCovRawSplit/ --odir ../DataDerived/ControlLOAD/Inputs/ --chr chr20
+19	:	1673401215.689	  2000.615	0	126	0	0	Rscript 0-prepare-DSS-inputs.R --idir ../DataRaw/MCovRawSplit/ --odir ../DataDerived/ControlLOAD/Inputs/ --chr chr19
+17	:	1673400676.739	  2603.494	0	126	0	0	Rscript 0-prepare-DSS-inputs.R --idir ../DataRaw/MCovRawSplit/ --odir ../DataDerived/ControlLOAD/Inputs/ --chr chr17
+22	:	1673402333.869	  1026.825	0	126	0	0	Rscript 0-prepare-DSS-inputs.R --idir ../DataRaw/MCovRawSplit/ --odir ../DataDerived/ControlLOAD/Inputs/ --chr chr22

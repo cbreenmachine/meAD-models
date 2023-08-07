@@ -1,0 +1,2 @@
+Seq	Host	Starttime	JobRuntime	Send	Receive	Exitval	Signal	Command
+1	:	1673446056.741	  7135.315	0	7019	0	0	wrapper ../DataDerived/ControlLOAD/Inputs/ diagnostic_group_coded
