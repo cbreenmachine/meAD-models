@@ -1,82 +1,57 @@
-# # filter_functions.R
-# # 
-
-# # 0_prepare_DSS_chrom.R
-# # takes M and Cov matrices, alongside phenotypes and outputs an R data store with bs object (input for DSS)
-# # and design matrix (df)
-
-# suppressPackageStartupMessages({
-#     library(data.table)
-#     library(argparse)
-#     library(DSS)
-#     library(magrittr)
-#     library(bsseq)
-# })
-
-# parser <- ArgumentParser()
-# parser$add_argument("--idir", default= "../DataRaw/MCovRawSplit/", help='Directory to run DSS on')
-# parser$add_argument("--odir", default= "../DataDerived/ControlLOAD/Inputs/", help='Directory to run DSS on')
-# parser$add_argument("--blood_file", default="../DataRaw/methylBedForDXM/bloodCellPropsDXM.csv")
-# parser$add_argument("--master_file", default="../DataRaw/masterSamplesheet.csv")
-# parser$add_argument("--chr", default= "chr22", help='Chromosome to run on')
-# # parser$add_argument("--keep_mci", help="TODO: NOT IMPLEMENTED")
-# parser$add_argument("--median_threshold", default=5, help="Keep sites with at least () median coverage")
-# parser$add_argument("--percent_nonzero_threshold", default=0.5, help="Keep sites with at least () minimum coverage")
-# parser$add_argument("--top_percent_most_variable", default=0.05, help="Keep top (5%) most variable in PC computation")
-# parser$add_argument("--save_pivots", action="store_true", help= "Save pivoted M and Cov matrices? Usually used when you want to check.")
-# args <- parser$parse_args()
 
 
+.read_bed <- function(idir, chr, sample){
+    #Creates input name like Data/chr22.100.bed
+    # and reads it
+    dt <- fread(file.path(idir, paste0(chr, ".", sample ,".bed")))
+    dt$sample <- as.numeric(sample) # numeric quiets warning
+    dt
+}
+
+pivot_me <- function(data, value) {
+    # Gets into Sample \times Position matrix of 
+    # M or Cov
+    # "value" is "methylated" or "coverage"
+    keepcols <- c("chromStart", "sample", value)
+
+    data %>% 
+        dplyr::select(all_of(keepcols)) %>%
+        tidyr::pivot_wider(values_from = value, names_from = sample) %>%
+        tibble::column_to_rownames("chromStart")
+}
 
 
+read_and_pivot_routine <- function(idir, chr, samples){
+    # Read and stack all sample-specific data files
+    .read_bed_wrapper <- function(sample){
+        .read_bed(idir, chr, sample)
+    }
+    data <- do.call(rbind, lapply(X = samples, FUN = .read_bed_wrapper))
 
-# # Check that the samples in the directory have phenotype and vice versa
-# idir.samples <- 
-#     unique(stringr::str_split_fixed(list.files(args$idir), "\\.", 3)[ ,2])
+    M <- pivot_me(data, "methylated")
+    Cov <- pivot_me(data, "coverage")
 
-# valid.samples <- intersect(master.df$sample_id, idir.samples)
-# load.samples <- intersect(
-#     master.df$sample_id[master.df$diagnostic_group == "LOAD"], 
-#     idir.samples)
-
-# ctrl.samples <- intersect(
-#     master.df$sample_id[master.df$diagnostic_group == "CONTROL"], 
-#     idir.samples
-#     )
-
-
-# read_wrapper <- function(s){
-#     #Creates input name like ../Data/chr22.100.bed
-#     # and reads it
-#     dt <- fread(file.path(args$idir, paste0(args$chr, ".", s ,".bed")))
-#     dt$sample <- as.numeric(s) # numeric quiets warning
-#     dt
-# }
-
-# data <- do.call(rbind, lapply(X=valid.samples, FUN=read_wrapper))
-
-# pivot_me <- function(data, value) {
-#     # Gets into Sample \times Position matrix of 
-#     # M or Cov
-#     # "value" is "methylated" or "coverage"
-#     keepcols <- c("chromStart", "sample", value)
-
-#     data %>% 
-#         dplyr::select(all_of(keepcols)) %>%
-#         tidyr::pivot_wider(values_from = value, names_from = sample) %>%
-#         tibble::column_to_rownames("chromStart")
-# }
-
-# M <- pivot_me(data, "methylated")
-# Cov <- pivot_me(data, "coverage")
+    return(list(M = M, Cov = Cov))
+}
 
 # # Set to zero so we can compute summary stats
-# Cov.zeroed <- data.table::copy(Cov) 
-# Cov.zeroed[is.na(Cov.zeroed)] <- 0
 
-# # min.coverage <- apply(Cov.zeroed, FUN=min, MARGIN=1)
-# percent.nonzero <- 1 - (rowSums(Cov.zeroed == 0) / ncol(Cov.zeroed))
-# med.coverage <- apply(Cov.zeroed, FUN=median, MARGIN=1)
+filter_and_impute <- function(m_cov){
+    m <- m_cov[["M"]]
+    cov <- m_cov[["Cov"]]
+
+    cov_zeroed <- data.table::copy(cov) 
+    cov_zeroed[is.na(cov_zeroed)] <- 0
+
+    # We'll use the number of samples as a divisor
+    n_samples <- ncol(cov_zeroed)
+    
+    percent_zero <- rowSums(Cov.zeroed == 0) / n_samples
+    percent_nonzero <- 1 - percent_zero
+
+    # median coverage calculation happens independently 
+    # from zero
+    med_cov <- apply(cov_zeroed, FUN=median, MARGIN=1)
 
 # # Pass both filters...
 # # Note that a CpG can pass if (e.g.) more than half of samples
@@ -102,6 +77,8 @@
 # # No need to impute if there's a minimum filter
 # M.filt <- data.table::copy(M)[keepix, ]
 # Cov.filt <- data.table::copy(Cov)[keepix, ]
+
+}
 
 # # Number of samples
 # N <- ncol(M.filt)
@@ -231,3 +208,8 @@
 # save(bs, df, pca.out, percent.keep, percent.of.kept.imputed, med.coverage, file = ofile)
 # print(paste0("Wrote out ", ofile))
 # #END
+
+
+extract_filtered_data <- function(bs){
+    
+}

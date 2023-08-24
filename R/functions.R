@@ -3,7 +3,7 @@
 
 clean_master_samplesheet <- function(ifile){
     # 
-    read.csv(args$master_file) %>%
+    read_csv(ifile) %>%
         dplyr::arrange(sample_id) %>% 
         dplyr::mutate(sample_id = as.character(sample_id)) %>%
         dplyr::filter(diagnostic_group != "MCI") %>%
@@ -15,8 +15,7 @@ clean_master_samplesheet <- function(ifile){
 
 get_valid_ids <- function(master_df, bed_dir){
     # Check that the samples in the directory have phenotype and vice versa
-    idir_samples <- 
-        unique(stringr::str_split_fixed(list.files(args$idir), "\\.", 3)[ ,2])
+    idir_samples <- unique(stringr::str_split_fixed(list.files(bed_dir), "\\.", 3)[ ,2])
 
     # All samples that are in the directory and sampleshseet
     valid_samples <- intersect(master_df$sample_id, idir_samples)
@@ -34,7 +33,7 @@ get_load_samples <- function(master_df, valid_samples){
 get_control_samples <- function(master_df, valid_samples){
     ctrl_samples <- intersect(
         master_df$sample_id[master_df$diagnostic_group == "CONTROL"], 
-        idir_samples
+        valid_samples
     )
     return(ctrl_samples)
 }
