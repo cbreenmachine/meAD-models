@@ -1,9 +1,0 @@
-Seq	Host	Starttime	JobRuntime	Send	Receive	Exitval	Signal	Command
-6	:	1652902023.589	 38343.249	0	0	0	0	extract ../data/03-calls/226.bcf ../data/04-extract/226.csv
-3	:	1652902023.388	 40111.338	0	0	0	0	extract ../data/03-calls/104.bcf ../data/04-extract/104.csv
-2	:	1652902023.362	 41499.115	0	0	0	0	extract ../data/03-calls/214.bcf ../data/04-extract/214.csv
-7	:	1652902023.635	 41815.532	0	0	0	0	extract ../data/03-calls/131.bcf ../data/04-extract/131.csv
-4	:	1652902023.456	 42356.619	0	0	0	0	extract ../data/03-calls/213.bcf ../data/04-extract/213.csv
-8	:	1652902023.717	 42483.084	0	0	0	0	extract ../data/03-calls/305.bcf ../data/04-extract/305.csv
-1	:	1652902023.342	 44817.313	0	0	0	0	extract ../data/03-calls/176.bcf ../data/04-extract/176.csv
-5	:	1652902023.517	 47160.367	0	0	0	0	extract ../data/03-calls/178.bcf ../data/04-extract/178.csv
