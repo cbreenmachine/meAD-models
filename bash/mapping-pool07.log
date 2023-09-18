@@ -1,2 +1,0 @@
-Seq	Host	Starttime	JobRuntime	Send	Receive	Exitval	Signal	Command
-1	:	1660516148.266	189234.111	0	25	0	0	map_wrapper ../data/pool07/245_CAAGGTAC-GAGATACG_L00M_R1_001.fastq.gz ../data/pool07/245_CAAGGTAC-GAGATACG_L00M_R2_001.fastq.gz

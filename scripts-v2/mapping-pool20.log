@@ -1,6 +1,0 @@
-Seq	Host	Starttime	JobRuntime	Send	Receive	Exitval	Signal	Command
-1	:	1659803927.601	 48334.628	0	25	1	0	map_wrapper ../data/pool20/499_GAACGGTT-ATTCCTCC_L00M_R1_001.fastq.gz ../data/pool20/499_GAACGGTT-ATTCCTCC_L00M_R2_001.fastq.gz
-2	:	1659852263.133	115537.469	0	25	0	0	map_wrapper ../data/pool20/500_GGAATGTC-GTGTTCCT_L00M_R1_001.fastq.gz ../data/pool20/500_GGAATGTC-GTGTTCCT_L00M_R2_001.fastq.gz
-3	:	1659967801.345	  6882.626	0	25	1	0	map_wrapper ../data/pool20/501_TGGTGAAG-GCTGTAAG_L00M_R1_001.fastq.gz ../data/pool20/501_TGGTGAAG-GCTGTAAG_L00M_R2_001.fastq.gz
-4	:	1659974684.544	100221.096	0	25	0	0	map_wrapper ../data/pool20/502_GGACATCA-TGCAGGTA_L00M_R1_001.fastq.gz ../data/pool20/502_GGACATCA-TGCAGGTA_L00M_R2_001.fastq.gz
-5	:	1660074906.351	130163.628	0	25	0	0	map_wrapper ../data/pool20/503_GGTGTACA-TAGCGTCT_L00M_R1_001.fastq.gz ../data/pool20/503_GGTGTACA-TAGCGTCT_L00M_R2_001.fastq.gz

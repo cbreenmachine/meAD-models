@@ -1,8 +1,0 @@
-Seq	Host	Starttime	JobRuntime	Send	Receive	Exitval	Signal	Command
-3	:	1661574548.679	     0.025	0	69	0	0	call_wrapper ../data/pool20/501.bam
-2	:	1661574548.659	 15468.565	0	0	0	0	call_wrapper ../data/pool20/500.bam
-5	:	1661590017.279	     0.017	0	69	0	0	call_wrapper ../data/pool20/503.bam
-6	:	1661590017.339	     0.013	0	69	0	0	call_wrapper ../data/pool20/504.bam
-7	:	1661590017.415	     0.013	0	69	0	0	call_wrapper ../data/pool20/505.bam
-4	:	1661574548.743	 18250.953	0	0	0	0	call_wrapper ../data/pool20/502.bam
-1	:	1661574548.631	 26641.552	0	0	0	0	call_wrapper ../data/pool20/499.bam

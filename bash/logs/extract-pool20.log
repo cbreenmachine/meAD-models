@@ -1,6 +1,0 @@
-Seq	Host	Starttime	JobRuntime	Send	Receive	Exitval	Signal	Command
-1	:	1661890038.192	     0.012	0	87	0	0	extract_wrapper ../data/pool20/499.bcf
-2	:	1661890038.203	     0.040	0	87	0	0	extract_wrapper ../data/pool20/501.bcf
-3	:	1661890038.243	     0.083	0	87	0	0	extract_wrapper ../data/pool20/503.bcf
-4	:	1661890038.326	     0.029	0	87	0	0	extract_wrapper ../data/pool20/504.bcf
-5	:	1661890038.350	     0.018	0	87	0	0	extract_wrapper ../data/pool20/505.bcf
